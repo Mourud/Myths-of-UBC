@@ -1,6 +1,6 @@
 # Strategy Game
 
 ---
+This is a game heavily inspired by Age of Mythology and Age of Empires
 
-This is a game inspired from Age of Empires and Age of Mythology
 ---
