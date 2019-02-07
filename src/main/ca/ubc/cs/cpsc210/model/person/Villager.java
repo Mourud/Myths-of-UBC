@@ -1,4 +1,4 @@
-package ca.ubc.cs.cpsc210.model.Person;
+package ca.ubc.cs.cpsc210.model.person;
 
 public class Villager extends Person {
     private int curFullHealth = 50;

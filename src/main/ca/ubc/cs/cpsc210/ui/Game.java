@@ -1,9 +1,9 @@
 package ca.ubc.cs.cpsc210.ui;
 
-import ca.ubc.cs.cpsc210.model.Resource.Farm;
-import ca.ubc.cs.cpsc210.model.Resource.Forrest;
-import ca.ubc.cs.cpsc210.model.Resource.GoldMine;
-import ca.ubc.cs.cpsc210.model.Resource.Resource;
+import ca.ubc.cs.cpsc210.model.resource.Farm;
+import ca.ubc.cs.cpsc210.model.resource.Forrest;
+import ca.ubc.cs.cpsc210.model.resource.GoldMine;
+import ca.ubc.cs.cpsc210.model.resource.Resource;
 import ca.ubc.cs.cpsc210.model.TownCentre;
 
 public class Game {
@@ -20,6 +20,7 @@ public class Game {
     private Resource farm;
     private Resource forests;
 
+    // Todo: redundant code? setTown?
     public Game(String difficulty) {
         if (difficulty.equals("Easy")) {
             playerTown = new TownCentre(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
@@ -36,6 +37,11 @@ public class Game {
         farm = new Farm();
         goldMine = new GoldMine();
         forests = new Forrest();
+    }
+
+    public void setTowns() {
+        playerTown = new TownCentre(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
+        enemyTown = new TownCentre(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
     }
 
     public TownCentre getEnemyTown() {

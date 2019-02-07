@@ -1,4 +1,4 @@
-package ca.ubc.cs.cpsc210.model.Resource;
+package ca.ubc.cs.cpsc210.model.resource;
 
 public class GoldMine extends Resource {
     public GoldMine() {

@@ -1,4 +1,4 @@
-package ca.ubc.cs.cpsc210.model.Person;
+package ca.ubc.cs.cpsc210.model.person;
 
 public class Soldier extends Person {
     private int curFullHealth = 100;

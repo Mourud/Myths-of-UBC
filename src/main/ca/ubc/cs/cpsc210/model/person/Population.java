@@ -1,4 +1,4 @@
-package ca.ubc.cs.cpsc210.model.Person;
+package ca.ubc.cs.cpsc210.model.person;
 
 import java.util.ArrayList;
 import java.util.Iterator;

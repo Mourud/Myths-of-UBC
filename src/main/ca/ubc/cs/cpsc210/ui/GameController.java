@@ -3,79 +3,78 @@ package ca.ubc.cs.cpsc210.ui;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class GameController extends Application implements EventHandler<ActionEvent> {
+public class GameController extends Application {
+    public static String TITLE = "The Myth";
     private Stage window;
     private Scene difficultyMenu;
-    private Scene gameDisplay;
     private Button buttonEasy;
     private Button buttonMedium;
     private Button buttonHard;
-    private Button buttonBack;
+    private String level1 = "Easy";
+    private String level2 = "Medium";
+    private String level3 = "Hard";
+    private VBox layout1;
 
     public static void main(String[] args) {
         launch(args);
-//        System.out.println(", Medium, Hard");
-//        Scanner input = new Scanner(System.in);
-//        String difficulty = input.nextLine();
-//        Game game = new Game(difficulty);
     }
 
     // TODO: Reformat UI class.
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         window = primaryStage;
         window.setTitle("The Myth");
+        window.setOnCloseRequest(e -> {
+            e.consume();
+            closeProgram();
+        });
+
         Label intro = new Label("Choose a difficulty: ");
-        buttonEasy = new Button("Easy");
-        buttonEasy.setOnAction(this);
-        buttonMedium = new Button("Medium");
-        buttonMedium.setOnAction(this);
-        buttonHard = new Button("Hard");
-        buttonHard.setOnAction(this);
+        //makeDifficultyButton(level1,buttonEasy);
+        buttonEasy = new Button(level1);
+        buttonEasy.setOnAction(e -> gameBuilder(level1));
+        buttonMedium = new Button(level2);
+        buttonMedium.setOnAction(e -> gameBuilder(level2));
+        buttonHard = new Button(level3);
+        buttonHard.setOnAction(e -> gameBuilder("Hard"));
 
         VBox layout1 = new VBox(20);
         layout1.getChildren().addAll(intro, buttonEasy, buttonMedium, buttonHard);
+        layout1.setAlignment(Pos.CENTER);
         difficultyMenu = new Scene(layout1, 200, 200);
-
-        Label goBack = new Label("Are you sure?");
-        buttonBack = new Button("Back");
-        buttonBack.setOnAction(this);
-
-        StackPane layout2 = new StackPane();
-        layout2.getChildren().addAll(goBack, buttonBack);
-        gameDisplay = new Scene(layout2, 100, 100);
 
         window.setScene(difficultyMenu);
         window.show();
     }
 
-    @Override
-    public void handle(ActionEvent event) {
-        if (event.getSource() == buttonEasy) {
-            Game game = new Game("Easy");
-            System.out.println("Easy game");
-            window.setScene(gameDisplay);
-        } else if (event.getSource() == buttonMedium) {
-            Game game = new Game("Medium");
-            System.out.println("Medium game");
-            window.setScene(gameDisplay);
-        } else if (event.getSource() == buttonHard) {
-            Game game = new Game("Hard");
-            System.out.println("Hard game");
-            window.setScene(gameDisplay);
-        } else if (event.getSource() == buttonBack) {
-            Game game = new Game("Hard");
-            System.out.println("Restart");
-            window.setScene(difficultyMenu);
-        } //else if ()
+    private void gameBuilder(String s) {
+        Game game = new Game(s);
+        System.out.println(s + " game");
+        boolean yes = ConfirmBox.display(TITLE, "Difficulty selected: " + s + "\n        Are you sure?");
+        if (yes) {
+            window.close();
+            GameMap.render();
+        }
     }
 
+    // what happens when game closes
+    private void closeProgram() {
+        Boolean closeNow = ConfirmBox.display(GameController.TITLE, "Are you sure you want to exit?");
+        if (closeNow) {
+            window.close();
+        }
+    }
+
+//    private void makeDifficultyButton(String s, Button b) {
+//        b.setOnAction(e -> gameBuilder(s));
+//
+//    }
 }
 

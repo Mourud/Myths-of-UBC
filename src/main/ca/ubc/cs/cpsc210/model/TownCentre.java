@@ -1,8 +1,8 @@
 package ca.ubc.cs.cpsc210.model;
 
-import ca.ubc.cs.cpsc210.model.Person.Person;
-import ca.ubc.cs.cpsc210.model.Person.Soldier;
-import ca.ubc.cs.cpsc210.model.Person.Villager;
+import ca.ubc.cs.cpsc210.model.person.Person;
+import ca.ubc.cs.cpsc210.model.person.Soldier;
+import ca.ubc.cs.cpsc210.model.person.Villager;
 
 import java.util.ArrayList;
 import java.util.List;

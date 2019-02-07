@@ -1,4 +1,4 @@
-package ca.ubc.cs.cpsc210.model.Person;
+package ca.ubc.cs.cpsc210.model.person;
 
 public abstract class Person {
     protected int curFullHealth = 50;
