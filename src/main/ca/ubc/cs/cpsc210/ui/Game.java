@@ -20,28 +20,23 @@ public class Game {
     private Resource farm;
     private Resource forests;
 
-    // Todo: redundant code? setTown?
+    // REQUIRES:
     public Game(String difficulty) {
         if (difficulty.equals("Easy")) {
-            playerTown = new TownCentre(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
-            enemyTown = new TownCentre(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
+            setTowns(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
         } else if (difficulty.equals("Medium")) {
-            playerTown = new TownCentre(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
-            enemyTown = new TownCentre(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
+            setTowns(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
         } else if (difficulty.equals("Hard")) {
-            playerTown = new TownCentre(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
-            enemyTown = new TownCentre(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
-        } else {
-            System.out.println("Invalid Difficulty.");
+            setTowns(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
         }
         farm = new Farm();
         goldMine = new GoldMine();
         forests = new Forrest();
     }
 
-    public void setTowns() {
-        playerTown = new TownCentre(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
-        enemyTown = new TownCentre(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
+    public void setTowns(int pop, int food, int gold) {
+        playerTown = new TownCentre(pop, food, gold);
+        enemyTown = new TownCentre(pop, food, gold);
     }
 
     public TownCentre getEnemyTown() {

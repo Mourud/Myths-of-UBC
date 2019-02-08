@@ -1,5 +1,7 @@
 package ca.ubc.cs.cpsc210.model.person;
 
+import ca.ubc.cs.cpsc210.model.TownCentre;
+
 public abstract class Person {
     protected int curFullHealth = 50;
     protected int curAttack = 1;

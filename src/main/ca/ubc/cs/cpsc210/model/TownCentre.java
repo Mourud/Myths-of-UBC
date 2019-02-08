@@ -34,6 +34,14 @@ public class TownCentre {
         return food;
     }
 
+    public void setFood(int food) {
+        this.food = food;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
     public int getGold() {
         return gold;
     }

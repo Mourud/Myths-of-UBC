@@ -5,6 +5,7 @@ public class Villager extends Person {
     private int curAttack = 1;
     private int health;
     private int attack;
+    private boolean nearReource;
 
     public Villager() {
         health = curFullHealth;
@@ -13,6 +14,9 @@ public class Villager extends Person {
 
     // TODO: Implement this method
     public void gatherResource() {
+//        if (nearReource) {
+//
+//        }
 
     }
 }

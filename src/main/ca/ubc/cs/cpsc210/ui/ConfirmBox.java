@@ -10,34 +10,29 @@ import javafx.stage.Stage;
 
 public class ConfirmBox {
     //Can't use fields if method is static
-    private Stage window;
+    private static Stage window;
     private static boolean answer;
+    private static Scene scene;
+    private static Button yesButton = new Button("Yes");
+    private static Button noButton = new Button("No");
+    private static Label label = new Label();
 
 
     public static boolean display(String title, String message) {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle(title);
-        window.setMinWidth(250);
+        setupWindow(title);
+        setupButtons();
+        setupScene(message);
+        showWindow();
+        return answer;
+    }
 
-        Label label = new Label();
+    private static void showWindow() {
+        window.setScene(scene);
+        window.showAndWait();
+    }
+
+    private static void setupScene(String message) {
         label.setText(message);
-
-
-        Button yesButton = new Button("Yes");
-        Button noButton = new Button("No");
-
-        yesButton.setOnAction(e -> {
-            answer = true;
-            window.close();
-        });
-        noButton.setOnAction(e -> {
-            answer = false;
-            window.close();
-        });
-
-
-
         HBox answerLayout = new HBox();
         answerLayout.getChildren().addAll(yesButton, noButton);
         answerLayout.setAlignment(Pos.CENTER);
@@ -46,10 +41,26 @@ public class ConfirmBox {
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(layout);
         borderPane.setCenter(answerLayout);
-        Scene scene = new Scene(borderPane);
-        window.setScene(scene);
-        window.showAndWait();
-        return answer;
+        scene = new Scene(borderPane);
     }
+
+    private static void setupButtons() {
+        yesButton.setOnAction(e -> {
+            answer = true;
+            window.close();
+        });
+        noButton.setOnAction(e -> {
+            answer = false;
+            window.close();
+        });
+    }
+
+    private static void setupWindow(String title) {
+        window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setMinWidth(250);
+    }
+
 
 }
