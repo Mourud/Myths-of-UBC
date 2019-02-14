@@ -1,7 +1,7 @@
 package ca.ubc.cs.cpsc210.tests;
 
-import ca.ubc.cs.cpsc210.model.TownCentre;
-import ca.ubc.cs.cpsc210.ui.Game;
+import ca.ubc.cs.cpsc210.model.constants.GameConstants;
+import ca.ubc.cs.cpsc210.model.town.TownCentre;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,12 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTownCentre {
 
-    private static final int EASY_START_POP = 15;
-    private static final int MEDIUM_START_POP = 10;
-    private static final int HARD_START_POP = 5;
-    private static final int EASY_START_RESOURCES = 500;
-    private static final int MEDIUM_START_RESOURCES = 250;
-    private static final int HARD_START_RESOURCES = 125;
+    // CONSTANTS
+    // LEVEL1 GAME SETTINGS
+    private static final int EASY_START_POP = GameConstants.EASY_START_POP;
+    private static final int EASY_START_RESOURCES = GameConstants.EASY_START_RESOURCES;
+
+    // PRICES
+    private static final int VILLAGER_FOOD_PRICE = GameConstants.STARTING_VILLAGER_FOOD_PRICE;
+    private static final int SOLDIER_FOOD_PRICE = GameConstants.STARTING_SOLDIER_FOOD_PRICE;
+    private static final int SOLDIER_GOLD_PRICE = GameConstants.STARTING_SOLDIER_GOLD_PRICE;
+
+    private static final int NO_OF_PERSON = 10;
+
+
     private TownCentre myCentre;
 
     @BeforeEach
@@ -25,22 +32,88 @@ public class TestTownCentre {
 
     @Test
     public void centreSetup() {
-        assertEquals(myCentre.getFood(), 500);
-        assertEquals(myCentre.getGold(), 500);
-        assertEquals(myCentre.getPopulation(), 15);
-
-        // assertTrue();
+        assertEquals(myCentre.getAmountFood(), EASY_START_RESOURCES);
+        assertEquals(myCentre.getAmountGold(), EASY_START_RESOURCES);
+        assertEquals(myCentre.getPopSize(), EASY_START_POP);
     }
 
 
     @Test
-    public void centreSetup2() {
-        assertEquals(myCentre.getFood(), 500);
-        assertEquals(myCentre.getGold(), 500);
-        myCentre.procreateVillagers();
-        assertEquals(myCentre.getPopulation(), 16);
+    public void testProcreateVillager() {
+        assertTrue(myCentre.procreateVillager());
+        assertEquals(myCentre.getPopSize(), EASY_START_POP + 1);
+        assertEquals(myCentre.getAmountFood(), EASY_START_RESOURCES - VILLAGER_FOOD_PRICE);
+    }
 
-        // assertTrue();
+    @Test
+    public void testProcreateMultipleVillager() {
+        for (int i = 0; i < NO_OF_PERSON; i++) {
+            assertTrue(myCentre.procreateVillager());
+        }
+        assertEquals(myCentre.getPopSize(), EASY_START_POP + NO_OF_PERSON);
+        assertEquals(myCentre.getAmountFood(), EASY_START_RESOURCES - NO_OF_PERSON * VILLAGER_FOOD_PRICE);
+    }
+
+    @Test
+    public void testProcreateMaxMultipleVillager() {
+        for (int i = 0; i < (EASY_START_RESOURCES / VILLAGER_FOOD_PRICE); i++) {
+            //assertTrue(myCentre.procreateVillager());
+            myCentre.procreateVillager();
+            System.out.println(i+"\t" + myCentre.getPopSize());
+        }
+        assertEquals(myCentre.getPopSize(), EASY_START_POP + (EASY_START_RESOURCES / VILLAGER_FOOD_PRICE));
+        assertEquals(myCentre.getAmountFood(), 0);
+    }
+
+    @Test
+    public void testProcreateMultipleVillagerNoMoney() {
+        for (int i = 0; i < (EASY_START_RESOURCES / VILLAGER_FOOD_PRICE); i++) {
+            assertTrue(myCentre.procreateVillager());
+        }
+        assertFalse(myCentre.procreateVillager());
+        assertEquals(myCentre.getPopSize(), EASY_START_POP + (EASY_START_RESOURCES / VILLAGER_FOOD_PRICE));
+        assertEquals(myCentre.getAmountFood(), 0);
+    }
+
+    @Test
+    public void testProcreateSoldier() {
+        assertTrue(myCentre.procreateSoldier());
+        assertEquals(myCentre.getPopSize(), EASY_START_POP + 1);
+        assertEquals(myCentre.getAmountFood(), EASY_START_RESOURCES - SOLDIER_FOOD_PRICE);
+        assertEquals(myCentre.getAmountGold(), EASY_START_RESOURCES - SOLDIER_GOLD_PRICE);
+
+    }
+
+    @Test
+    public void testProcreateMultipleSoldier() {
+        for (int i = 0; i < NO_OF_PERSON; i++) {
+            assertTrue(myCentre.procreateSoldier());
+        }
+        assertEquals(myCentre.getPopSize(), EASY_START_POP + NO_OF_PERSON);
+        assertEquals(myCentre.getAmountFood(), EASY_START_RESOURCES - NO_OF_PERSON * SOLDIER_FOOD_PRICE);
+        assertEquals(myCentre.getAmountGold(), EASY_START_RESOURCES - NO_OF_PERSON * SOLDIER_GOLD_PRICE);
+
+    }
+
+    @Test
+    public void testProcreateMaxMultipleSoldier() {
+        for (int i = 0; i < (EASY_START_RESOURCES / SOLDIER_FOOD_PRICE); i++) {
+            assertTrue(myCentre.procreateSoldier());
+        }
+        assertEquals(myCentre.getPopSize(), EASY_START_POP + (EASY_START_RESOURCES / SOLDIER_FOOD_PRICE));
+        assertEquals(myCentre.getAmountGold(), 0);
+        assertEquals(myCentre.getAmountFood(), 0);
+    }
+
+    @Test
+    public void testProcreateMultipleSoldierNoMoney() {
+        for (int i = 0; i < (EASY_START_RESOURCES / SOLDIER_FOOD_PRICE); i++) {
+            assertTrue(myCentre.procreateSoldier());
+        }
+        assertFalse(myCentre.procreateSoldier());
+        assertEquals(myCentre.getPopSize(), EASY_START_POP + (EASY_START_RESOURCES / SOLDIER_FOOD_PRICE));
+        assertEquals(myCentre.getAmountFood(), 0);
+        assertEquals(myCentre.getAmountGold(), 0);
     }
 
     //TODO: Check all the other methods

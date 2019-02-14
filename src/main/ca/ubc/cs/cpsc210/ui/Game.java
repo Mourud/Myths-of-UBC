@@ -1,32 +1,43 @@
 package ca.ubc.cs.cpsc210.ui;
 
+import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 import ca.ubc.cs.cpsc210.model.resource.Farm;
 import ca.ubc.cs.cpsc210.model.resource.Forrest;
 import ca.ubc.cs.cpsc210.model.resource.GoldMine;
-import ca.ubc.cs.cpsc210.model.resource.Resource;
-import ca.ubc.cs.cpsc210.model.TownCentre;
+import ca.ubc.cs.cpsc210.model.resource.ResourceHotSpot;
+import ca.ubc.cs.cpsc210.model.town.TownCentre;
 
 public class Game {
-    private static final int EASY_START_POP = 15;
-    private static final int MEDIUM_START_POP = 10;
-    private static final int HARD_START_POP = 5;
-    private static final int EASY_START_RESOURCES = 500;
-    private static final int MEDIUM_START_RESOURCES = 250;
-    private static final int HARD_START_RESOURCES = 125;
+
+    // Constants
+    // LEVEL1 GAME SETTINGS
+    public static final String LEVEL1 = GameConstants.LEVEL1;
+    private static final int EASY_START_POP = GameConstants.EASY_START_POP;
+    private static final int EASY_START_RESOURCES = GameConstants.EASY_START_RESOURCES;
+
+    // LEVEL2 GAME SETTINGS
+    public static final String LEVEL2 = GameConstants.LEVEL2;
+    private static final int MEDIUM_START_POP = GameConstants.MEDIUM_START_POP;
+    private static final int MEDIUM_START_RESOURCES = GameConstants.MEDIUM_START_RESOURCES;
+
+    // LEVEL3 GAME SETTINGS
+    public static final String LEVEL3 = GameConstants.LEVEL3;
+    private static final int HARD_START_POP = GameConstants.HARD_START_POP;
+    private static final int HARD_START_RESOURCES = GameConstants.HARD_START_RESOURCES;
 
     private TownCentre playerTown;
     private TownCentre enemyTown;
-    private Resource goldMine;
-    private Resource farm;
-    private Resource forests;
+    private ResourceHotSpot goldMine;
+    private ResourceHotSpot farm;
+    private ResourceHotSpot forests;
 
     // REQUIRES:
     public Game(String difficulty) {
-        if (difficulty.equals("Easy")) {
+        if (difficulty.equals(LEVEL1)) {
             setTowns(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
-        } else if (difficulty.equals("Medium")) {
+        } else if (difficulty.equals(LEVEL2)) {
             setTowns(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
-        } else if (difficulty.equals("Hard")) {
+        } else if (difficulty.equals(LEVEL3)) {
             setTowns(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
         }
         farm = new Farm();

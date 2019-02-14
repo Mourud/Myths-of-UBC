@@ -33,7 +33,7 @@ public class ConfirmBox {
 
     private static void setupScene(String message) {
         label.setText(message);
-        HBox answerLayout = new HBox();
+        HBox answerLayout = new HBox(10);
         answerLayout.getChildren().addAll(yesButton, noButton);
         answerLayout.setAlignment(Pos.CENTER);
         StackPane layout = new StackPane(label);
