@@ -6,8 +6,8 @@ public class Soldier extends Person {
 
     // MODIFIES: this
     // EFFECTS: SETS GATHER RATE TO 50 BY DEFAULT
-    public Soldier(int curMaxHealth, int attack, int posX, int posY, TownCentre town) {
-        super(curMaxHealth, attack, posX, posY,town);
+    public Soldier(int curMaxHealth, int attack, int gatherRate, int posX, int posY, TownCentre town) {
+        super(curMaxHealth, attack, gatherRate, posX, posY,town);
 
     }
 }

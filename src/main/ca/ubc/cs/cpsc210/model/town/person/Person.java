@@ -10,13 +10,16 @@ public abstract class Person implements GameObjects {
     private int attack;
     private int posX;
     private int posY;
+    private int gatherRate;
+    // TODO: Is the Town Centre reference needed?
     protected TownCentre myTown;
 
     // TODO: Add identifier. Kill person if identifier is equal
-    public Person(int curMaxHealth, int attack, int posX, int posY, TownCentre t) {
+    public Person(int curMaxHealth, int attack, int gatherRate, int posX, int posY, TownCentre t) {
         this.curMaxHealth = curMaxHealth;
         this.health = curMaxHealth;
         this.attack = attack;
+        this.gatherRate = gatherRate;
         this.posX = posX;
         this.posY = posY;
         myTown = t;

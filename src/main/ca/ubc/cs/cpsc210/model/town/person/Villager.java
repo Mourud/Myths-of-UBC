@@ -8,8 +8,8 @@ public class Villager extends Person {
     private boolean nearReource;
 
     // TODO: IF I CHANGE PARAMETERS I'M HAVING TO CHANGE TO A LOT OF CODE
-    public Villager(int curMaxHealth, int attack, int posX, int posY, TownCentre town) {
-        super(curMaxHealth, attack, posX, posY, town);
+    public Villager(int curMaxHealth, int attack, int gatherRate, int posX, int posY, TownCentre town) {
+        super(curMaxHealth, attack, gatherRate, posX, posY, town);
     }
 
     // TODO: Implement this method
