@@ -10,14 +10,14 @@ public class TownCentre implements GameObjects {
 
     // CONSTANTS
 
-        // VILLAGER STATS
+    // VILLAGER STATS
     private int villagerMaxHealth = GameConstants.STARTING_MAX_HEALTH_VILLAGER;
     private int villagerAttack = GameConstants.STARTING_ATTACK_VILLAGER;
     private int villagerGatherRate = GameConstants.STARTING_GATHER_RATHER_VILLAGER;
     private int villagerFoodPrice = GameConstants.STARTING_VILLAGER_FOOD_PRICE;
     private int villagerGoldPrice = GameConstants.STARTING_VILLAGER_GOLD_PRICE;
 
-        // SOLDIER STATS
+    // SOLDIER STATS
     private int soldierMaxHealth = GameConstants.STARTING_MAX_HEALTH_SOLDIER;
     private int soldierAttack = GameConstants.STARTING_ATTACK_SOLDIER;
     private int soldierGatherRate = GameConstants.STARTING_GATHER_RATHER_SOLDIER;
@@ -26,7 +26,7 @@ public class TownCentre implements GameObjects {
 
     // TODO: Change position of Town Centre?
     // TODO: Should Town Centre coordinates be public/ private?
-        // TOWN CENTRE STATS
+    // TOWN CENTRE STATS
     public static final int posX = GameConstants.PLAYER_TOWN_POS_X;
     public static final int posY = GameConstants.PLAYER_TOWN_POS_Y;
 
@@ -78,8 +78,8 @@ public class TownCentre implements GameObjects {
     }
 
     // MODIFIES: this
-    // EFFECTS: 1. adds new villager to the registry
-    //          2. reduces amountFood by villagerFoodPrices
+    // EFFECTS: 1. adds new soldier to the registry
+    //          2. reduces amountFood by soldierFoodPrices
     public boolean procreateSoldier() {
         if (amountFood >= soldierFoodPrice && amountGold >= soldierGoldPrice) {
             registry.add(new Soldier(
@@ -97,11 +97,18 @@ public class TownCentre implements GameObjects {
         }
     }
 
+    // TODO: Implement this
     // EFFECTS: Generates random position values
     private int makeNewPos() {
         return 0;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds resource to the current resourceAmount
+    // TODO: Implement this
+    public void gatherResounce(String resourceName) {
+
+    }
 
     public int getAmountFood() {
         return amountFood;
@@ -118,10 +125,6 @@ public class TownCentre implements GameObjects {
     public void setRegistry(Registry registry) {
         this.registry = registry;
     }
-
-//    public void decrementResounce(String resourceName) {
-//
-//    }
 
     public int getAmountGold() {
         return amountGold;

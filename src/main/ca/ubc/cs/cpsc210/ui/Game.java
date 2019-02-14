@@ -1,15 +1,16 @@
 package ca.ubc.cs.cpsc210.ui;
 
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
-import ca.ubc.cs.cpsc210.model.resource.Farm;
-import ca.ubc.cs.cpsc210.model.resource.Forrest;
-import ca.ubc.cs.cpsc210.model.resource.GoldMine;
-import ca.ubc.cs.cpsc210.model.resource.ResourceHotSpot;
+import ca.ubc.cs.cpsc210.model.resourcehotspot.Farm;
+import ca.ubc.cs.cpsc210.model.resourcehotspot.Forrest;
+import ca.ubc.cs.cpsc210.model.resourcehotspot.GoldMine;
+import ca.ubc.cs.cpsc210.model.resourcehotspot.ResourceHotSpot;
 import ca.ubc.cs.cpsc210.model.town.TownCentre;
 
 public class Game {
 
-    // Constants
+    // CONSTANTS
+
     // LEVEL1 GAME SETTINGS
     public static final String LEVEL1 = GameConstants.LEVEL1;
     private static final int EASY_START_POP = GameConstants.EASY_START_POP;

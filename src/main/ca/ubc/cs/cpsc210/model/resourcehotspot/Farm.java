@@ -1,4 +1,4 @@
-package ca.ubc.cs.cpsc210.model.resource;
+package ca.ubc.cs.cpsc210.model.resourcehotspot;
 
 public class Farm extends ResourceHotSpot {
     public Farm() {
