@@ -11,7 +11,6 @@ public abstract class Person implements GameObjects {
     private int posX;
     private int posY;
     private int gatherRate;
-    // TODO: Is the Town Centre reference needed?
     protected TownCentre myTown;
 
     // TODO: Add identifier. Kill person if identifier is equal
@@ -34,6 +33,14 @@ public abstract class Person implements GameObjects {
         posY += dy;
 
     }
+    // TODO: Finish this
+    // REQUIRES:
+    // MODIFIES: myTown
+    // EFFECTS: increases amount of resource that it's in contact with
+//    public void gatherResource(){
+//        //myTown.gatherResource();
+//    }
+
 
     // MODIFIES: param enemy
     // EFFECTS: decreases enemy health

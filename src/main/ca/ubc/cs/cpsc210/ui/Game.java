@@ -10,6 +10,7 @@ import ca.ubc.cs.cpsc210.model.town.TownCentre;
 public class Game {
 
     // CONSTANTS
+    // Does enemy need a seperate class?
 
     // LEVEL1 GAME SETTINGS
     public static final String LEVEL1 = GameConstants.LEVEL1;
@@ -32,7 +33,9 @@ public class Game {
     private ResourceHotSpot farm;
     private ResourceHotSpot forests;
 
-    // REQUIRES:
+    // REQUIRES: valid difficulty
+    // MODIFIES: this
+    // EFFECTS: makes game depending on difficulty
     public Game(String difficulty) {
         if (difficulty.equals(LEVEL1)) {
             setTowns(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
@@ -43,9 +46,11 @@ public class Game {
         }
         farm = new Farm();
         goldMine = new GoldMine();
-        forests = new Forest();
+        //forests = new Forest();
     }
 
+    // REQUIRES: (pop, food, gold) > 0
+    // EFFECTS: sets game with give population, food
     public void setTowns(int pop, int food, int gold) {
         playerTown = new TownCentre(pop, food, gold);
         enemyTown = new TownCentre(pop, food, gold);

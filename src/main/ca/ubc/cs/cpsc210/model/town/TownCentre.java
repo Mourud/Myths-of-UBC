@@ -27,9 +27,6 @@ public class TownCentre implements GameObjects {
     // TODO: Change position of Town Centre?
     // TODO: Should Town Centre coordinates be public/ private?
     // TOWN CENTRE STATS
-    public static final int posX = GameConstants.PLAYER_TOWN_POS_X;
-    public static final int posY = GameConstants.PLAYER_TOWN_POS_Y;
-
 
     // FIELDS
     private int amountFood;
@@ -47,8 +44,8 @@ public class TownCentre implements GameObjects {
             registry.add(new Villager(villagerMaxHealth,
                     villagerAttack,
                     villagerGatherRate,
-                    0,
-                    0,
+                    makeNewPos(),
+                    makeNewPos(),
                     this
             ));
         }
@@ -109,13 +106,17 @@ public class TownCentre implements GameObjects {
     // TODO: Should resource have a separate class
     // TODO: Should gatherRate be here?
     // TODO: Should Resource be a class in itself so I could just add resources?
-    public void gatherResounce(String resourceName, int gatherRate) {
-        if (resourceName.equals("G")) {
-            amountGold += gatherRate;
-        } else if (resourceName.equals("F")) {
-            amountFood += gatherRate;
+    public void gatherResource(String resourceName, int gatherRate) {
+        if (gatherRate != 0) {
+            if (resourceName.equals("G")) {
+                amountGold += gatherRate;
+            } else if (resourceName.equals("F")) {
+                amountFood += gatherRate;
+            } else {
+                System.out.println("INVALID");
+            }
         } else {
-            System.out.println("do something");
+            System.out.println("Can't gather");
         }
     }
 

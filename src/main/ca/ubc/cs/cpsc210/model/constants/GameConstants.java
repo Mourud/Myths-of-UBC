@@ -1,9 +1,5 @@
 package ca.ubc.cs.cpsc210.model.constants;
 
-import ca.ubc.cs.cpsc210.model.resourcehotspot.Farm;
-import ca.ubc.cs.cpsc210.model.resourcehotspot.Forest;
-import ca.ubc.cs.cpsc210.model.resourcehotspot.GoldMine;
-import ca.ubc.cs.cpsc210.model.resourcehotspot.ResourceHotSpot;
 
 public class GameConstants {
 
@@ -11,6 +7,10 @@ public class GameConstants {
 
         // GAME TITLE
     public static final String TITLE = "The Myth";
+
+        // DISPLAY
+    private static final int GAME_SCREEN_WIDTH = 1000;
+    private static final int GAME_SCREEN_HEIGHT = 1000;
 
         // DIFFICULTY CONSTANTS
 
@@ -51,11 +51,9 @@ public class GameConstants {
     public static final int PLAYER_TOWN_POS_X = 0;
     public static final int PLAYER_TOWN_POS_Y = 0;
 
-    // TODO: Change enemy position to other end of screen
             // ENEMY
-    public static final int ENEMY_TOWN_POS_X = 0;
-    public static final int ENEMY_TOWN_POS_Y = 0;
-    // TODO: Should ResourceHotSpot be in here?
+    public static final int ENEMY_TOWN_POS_X = GAME_SCREEN_WIDTH;
+    public static final int ENEMY_TOWN_POS_Y = GAME_SCREEN_HEIGHT;
         // ResourceHotSpot
     public static final int STARTING_RESOURCES = 50000;
 //    public static final ResourceHotSpot GOLD_MINE = new GoldMine();

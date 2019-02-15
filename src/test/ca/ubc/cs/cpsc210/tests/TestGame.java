@@ -64,7 +64,6 @@ public class TestGame {
         assertEquals(game.getEnemyTown().getAmountGold(), HARD_START_RESOURCES);
     }
 
-    // TODO: Should setTown be tested, should the constructor be tested differently?
     @Test
     void testSetTown(){
         game = new Game(LEVEL1);
