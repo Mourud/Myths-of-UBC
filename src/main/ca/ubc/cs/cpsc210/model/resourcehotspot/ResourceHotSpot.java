@@ -1,21 +1,21 @@
 package ca.ubc.cs.cpsc210.model.resourcehotspot;
 
 import ca.ubc.cs.cpsc210.model.GameObjects;
+import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 
 public abstract class ResourceHotSpot implements GameObjects {
-    private static final int STARTRESOURCE = 50000;
-    private int resourceLeft;
+    private int resourceRemaining;
 
     public ResourceHotSpot() {
-        resourceLeft = STARTRESOURCE;
+        resourceRemaining = GameConstants.STARTING_RESOURCES;
     }
 
-    public int getResourceLeft() {
-        return resourceLeft;
+    public int getResourceRemaining() {
+        return resourceRemaining;
     }
 
     //TODO: SUBSTRACT WITH GATHER RATE
-    protected void decrementResourceLeft() {
-        resourceLeft--;
+    protected void decrementResourceLeft(int gatherRate) {
+        resourceRemaining -= gatherRate;
     }
 }

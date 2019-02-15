@@ -1,5 +1,10 @@
 package ca.ubc.cs.cpsc210.model.constants;
 
+import ca.ubc.cs.cpsc210.model.resourcehotspot.Farm;
+import ca.ubc.cs.cpsc210.model.resourcehotspot.Forest;
+import ca.ubc.cs.cpsc210.model.resourcehotspot.GoldMine;
+import ca.ubc.cs.cpsc210.model.resourcehotspot.ResourceHotSpot;
+
 public class GameConstants {
 
     // CONSTANTS
@@ -40,7 +45,7 @@ public class GameConstants {
     public static final int STARTING_SOLDIER_FOOD_PRICE = 10;
     public static final int STARTING_SOLDIER_GOLD_PRICE = 10;
 
-        // TOWN CENTRE CONSTANTS
+        // TOWN CENTRE
 
             // PLAYER
     public static final int PLAYER_TOWN_POS_X = 0;
@@ -50,5 +55,11 @@ public class GameConstants {
             // ENEMY
     public static final int ENEMY_TOWN_POS_X = 0;
     public static final int ENEMY_TOWN_POS_Y = 0;
+    // TODO: Should ResourceHotSpot be in here?
+        // ResourceHotSpot
+    public static final int STARTING_RESOURCES = 50000;
+//    public static final ResourceHotSpot GOLD_MINE = new GoldMine();
+//    public static final ResourceHotSpot FARM = new Farm();
+//    public static final ResourceHotSpot FOREST = new Forest();
 
 }

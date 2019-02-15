@@ -106,8 +106,17 @@ public class TownCentre implements GameObjects {
     // MODIFIES: this
     // EFFECTS: adds resource to the current resourceAmount
     // TODO: Implement this
-    public void gatherResounce(String resourceName) {
-
+    // TODO: Should resource have a separate class
+    // TODO: Should gatherRate be here?
+    // TODO: Should Resource be a class in itself so I could just add resources?
+    public void gatherResounce(String resourceName, int gatherRate) {
+        if (resourceName.equals("G")) {
+            amountGold += gatherRate;
+        } else if (resourceName.equals("F")) {
+            amountFood += gatherRate;
+        } else {
+            System.out.println("do something");
+        }
     }
 
     public int getAmountFood() {
