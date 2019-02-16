@@ -139,10 +139,6 @@ public class TownCentre implements GameObject {
         this.amountGold = amountGold;
     }
 
-    public void setRegistry(Registry registry) {
-        this.registry = registry;
-    }
-
     public int getAmountGold() {
         return amountGold;
     }

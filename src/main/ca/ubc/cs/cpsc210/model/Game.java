@@ -41,6 +41,8 @@ public class Game {
             setTowns(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
         } else if (difficulty.equals(LEVEL3)) {
             setTowns(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
+        } else {
+            System.out.println("Invalid");
         }
         farm = new Farm();
         goldMine = new GoldMine();

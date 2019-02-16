@@ -29,7 +29,7 @@ public class Position {
     }
     // TODO: Implement this method
 
-    public static Position random() {
-        return null;
-    }
+//    public static Position random() {
+//        return null;
+//    }
 }

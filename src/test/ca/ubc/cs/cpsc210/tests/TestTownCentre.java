@@ -116,4 +116,22 @@ public class TestTownCentre {
         assertEquals(myCentre.getAmountFood(), EASY_START_RESOURCES - EASY_START_RESOURCES / SOLDIER_FOOD_PRICE * SOLDIER_FOOD_PRICE);
         assertEquals(myCentre.getAmountGold(), EASY_START_RESOURCES - EASY_START_RESOURCES / SOLDIER_FOOD_PRICE * SOLDIER_GOLD_PRICE);
     }
+
+    @Test
+    public void getterAndSetters() {
+        myCentre.getAmountFood();
+        myCentre.getPopSize();
+        myCentre.getAmountGold();
+        myCentre.getRegistry();
+        myCentre.setAmountFood(0);
+        myCentre.setAmountGold(0);
+    }
+
+    @Test
+    public void testGatherResource() {
+        myCentre.gatherResource("G",1);
+        myCentre.gatherResource("G",0);
+        myCentre.gatherResource("F",1);
+        myCentre.gatherResource("F",0);
+    }
 }
