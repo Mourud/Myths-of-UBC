@@ -1,9 +1,9 @@
-package ca.ubc.cs.cpsc210.model.town.person;
+package ca.ubc.cs.cpsc210.model.person;
 
-import ca.ubc.cs.cpsc210.model.GameObjects;
-import ca.ubc.cs.cpsc210.model.town.TownCentre;
+import ca.ubc.cs.cpsc210.model.GameObject;
+import ca.ubc.cs.cpsc210.model.TownCentre;
 
-public abstract class Person implements GameObjects {
+public abstract class Person implements GameObject {
     private int id;
     private int curMaxHealth;
     private int health;
@@ -12,9 +12,12 @@ public abstract class Person implements GameObjects {
     private int posY;
     private int gatherRate;
     protected TownCentre myTown;
+    private boolean nearResource;
+
 
     // TODO: Add identifier. Kill person if identifier is equal
-    public Person(int curMaxHealth, int attack, int gatherRate, int posX, int posY, TownCentre t) {
+    public Person(int id, int curMaxHealth, int attack, int gatherRate, int posX, int posY, TownCentre t) {
+        this.id = id;
         this.curMaxHealth = curMaxHealth;
         this.health = curMaxHealth;
         this.attack = attack;
@@ -82,6 +85,14 @@ public abstract class Person implements GameObjects {
 
     public void setCurMaxHealth(int curMaxHealth) {
         this.curMaxHealth = curMaxHealth;
+    }
+
+    // TODO: Implement this method
+    public void gatherResource() {
+        nearResource = false;
+        if (nearResource) {
+            myTown.setAmountFood(6);
+        }
     }
 
 }

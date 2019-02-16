@@ -1,11 +1,9 @@
-package ca.ubc.cs.cpsc210.ui;
+package ca.ubc.cs.cpsc210.model;
 
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 import ca.ubc.cs.cpsc210.model.resourcehotspot.Farm;
-import ca.ubc.cs.cpsc210.model.resourcehotspot.Forest;
 import ca.ubc.cs.cpsc210.model.resourcehotspot.GoldMine;
 import ca.ubc.cs.cpsc210.model.resourcehotspot.ResourceHotSpot;
-import ca.ubc.cs.cpsc210.model.town.TownCentre;
 
 public class Game {
 

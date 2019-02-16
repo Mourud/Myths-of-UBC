@@ -56,6 +56,7 @@ public class GameConstants {
     public static final int ENEMY_TOWN_POS_Y = GAME_SCREEN_HEIGHT;
         // ResourceHotSpot
     public static final int STARTING_RESOURCES = 50000;
+
 //    public static final ResourceHotSpot GOLD_MINE = new GoldMine();
 //    public static final ResourceHotSpot FARM = new Farm();
 //    public static final ResourceHotSpot FOREST = new Forest();

@@ -1,7 +1,7 @@
 package ca.ubc.cs.cpsc210.tests;
 
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
-import ca.ubc.cs.cpsc210.model.town.TownCentre;
+import ca.ubc.cs.cpsc210.model.TownCentre;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

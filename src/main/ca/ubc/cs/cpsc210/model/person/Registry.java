@@ -1,4 +1,4 @@
-package ca.ubc.cs.cpsc210.model.town.person;
+package ca.ubc.cs.cpsc210.model.person;
 
 import java.util.*;
 import java.util.function.Predicate;

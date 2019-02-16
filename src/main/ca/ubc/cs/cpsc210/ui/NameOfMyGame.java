@@ -1,5 +1,6 @@
 package ca.ubc.cs.cpsc210.ui;
 
+import ca.ubc.cs.cpsc210.model.Game;
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -10,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class GameController extends Application {
+public class NameOfMyGame extends Application {
 
     public static final String TITLE = GameConstants.TITLE;
     public static final String LEVEL1 = GameConstants.LEVEL1;
@@ -81,7 +82,7 @@ public class GameController extends Application {
 
     // what happens when game closes
     private void closeProgram() {
-        Boolean closeNow = ConfirmBox.display(GameController.TITLE, "Are you sure you want to exit?");
+        Boolean closeNow = ConfirmBox.display(NameOfMyGame.TITLE, "Are you sure you want to exit?");
         if (closeNow) {
             window.close();
 

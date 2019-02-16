@@ -1,11 +1,11 @@
 package ca.ubc.cs.cpsc210.tests;
 
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
-import ca.ubc.cs.cpsc210.ui.Game;
+import ca.ubc.cs.cpsc210.model.Game;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+// TODO:(IMP) How to check coverage)
 
 public class TestGame {
 

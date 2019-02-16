@@ -1,12 +1,12 @@
-package ca.ubc.cs.cpsc210.model.town;
+package ca.ubc.cs.cpsc210.model;
 
-import ca.ubc.cs.cpsc210.model.GameObjects;
+import ca.ubc.cs.cpsc210.model.GameObject;
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
-import ca.ubc.cs.cpsc210.model.town.person.Registry;
-import ca.ubc.cs.cpsc210.model.town.person.Soldier;
-import ca.ubc.cs.cpsc210.model.town.person.Villager;
+import ca.ubc.cs.cpsc210.model.person.Registry;
+import ca.ubc.cs.cpsc210.model.person.Soldier;
+import ca.ubc.cs.cpsc210.model.person.Villager;
 
-public class TownCentre implements GameObjects {
+public class TownCentre implements GameObject {
 
     // CONSTANTS
 
@@ -32,6 +32,7 @@ public class TownCentre implements GameObjects {
     private int amountFood;
     private int amountGold;
     private Registry registry = new Registry();
+    private int id = 0;
 
     // REQUIRES: (startPop, startFood, startGold) > 0
     // MODIFIES: this
@@ -41,7 +42,10 @@ public class TownCentre implements GameObjects {
     //  startPop amount of Villagers
     public TownCentre(int startPop, int startFood, int startGold) {
         for (int i = 0; i < startPop; i++) {
-            registry.add(new Villager(villagerMaxHealth,
+            id++;
+            registry.add(new Villager(
+                    id,
+                    villagerMaxHealth,
                     villagerAttack,
                     villagerGatherRate,
                     makeNewPos(),
@@ -59,7 +63,10 @@ public class TownCentre implements GameObjects {
     //          2. reduces amountFood by villagerFoodPrices
     public boolean procreateVillager() {
         if (amountFood >= villagerFoodPrice && amountGold >= villagerGoldPrice) {
-            registry.add(new Villager(villagerMaxHealth,
+            id++;
+            registry.add(new Villager(
+                    id,
+                    villagerMaxHealth,
                     villagerAttack,
                     villagerGatherRate,
                     makeNewPos(),
@@ -79,12 +86,14 @@ public class TownCentre implements GameObjects {
     //          2. reduces amountFood by soldierFoodPrices
     public boolean procreateSoldier() {
         if (amountFood >= soldierFoodPrice && amountGold >= soldierGoldPrice) {
+            id++;
             registry.add(new Soldier(
+                    id,
                     soldierMaxHealth,
                     soldierAttack,
                     soldierGatherRate,
-                    0,
-                    0,
+                    makeNewPos(),
+                    makeNewPos(),
                     this));
             amountFood -= soldierFoodPrice;
             amountGold -= soldierGoldPrice;
@@ -103,8 +112,6 @@ public class TownCentre implements GameObjects {
     // MODIFIES: this
     // EFFECTS: adds resource to the current resourceAmount
     // TODO: Implement this
-    // TODO: Should resource have a separate class
-    // TODO: Should gatherRate be here?
     // TODO: Should Resource be a class in itself so I could just add resources?
     public void gatherResource(String resourceName, int gatherRate) {
         if (gatherRate != 0) {
