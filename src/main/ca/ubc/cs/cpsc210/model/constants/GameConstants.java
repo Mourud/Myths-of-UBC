@@ -1,6 +1,8 @@
 package ca.ubc.cs.cpsc210.model.constants;
 
 
+import ca.ubc.cs.cpsc210.model.Position;
+
 public class GameConstants {
 
     // CONSTANTS
@@ -30,7 +32,7 @@ public class GameConstants {
     public static final int HARD_START_RESOURCES = 125;
 
         // PERSON CONSTANTS
-
+    public static final int BIRTH_RADIUS = 50;
             // VILLAGER
     public static final int STARTING_MAX_HEALTH_VILLAGER = 50;
     public static final int STARTING_ATTACK_VILLAGER = 1;
@@ -50,11 +52,14 @@ public class GameConstants {
             // PLAYER
     public static final int PLAYER_TOWN_POS_X = 0;
     public static final int PLAYER_TOWN_POS_Y = 0;
+    public static final Position PLAYER_TOWN_POS = new Position(PLAYER_TOWN_POS_X, PLAYER_TOWN_POS_Y);
 
             // ENEMY
     public static final int ENEMY_TOWN_POS_X = GAME_SCREEN_WIDTH;
     public static final int ENEMY_TOWN_POS_Y = GAME_SCREEN_HEIGHT;
-        // ResourceHotSpot
+    public static final Position ENEMY_TOWN_POS = new Position(ENEMY_TOWN_POS_X, ENEMY_TOWN_POS_Y);
+
+    // ResourceHotSpot
     public static final int STARTING_RESOURCES = 50000;
 
 //    public static final ResourceHotSpot GOLD_MINE = new GoldMine();

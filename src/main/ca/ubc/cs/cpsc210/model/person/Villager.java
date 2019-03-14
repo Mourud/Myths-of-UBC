@@ -6,8 +6,8 @@ public class Villager extends Person {
 
 
 
-    public Villager(int id, int curMaxHealth, int attack, int gatherRate, int posX, int posY, TownCentre town) {
-        super(id, curMaxHealth, attack, gatherRate, posX, posY, town);
+    public Villager(int id, int curMaxHealth, int attack, int gatherRate, TownCentre town) {
+        super(id, curMaxHealth, attack, gatherRate, town);
     }
 
 

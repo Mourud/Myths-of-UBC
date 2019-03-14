@@ -1,5 +1,6 @@
 package ca.ubc.cs.cpsc210.tests;
 
+import ca.ubc.cs.cpsc210.model.Position;
 import ca.ubc.cs.cpsc210.model.TownCentre;
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 import ca.ubc.cs.cpsc210.model.person.Person;
@@ -23,6 +24,8 @@ public class TestPerson {
     private int soldierGatherRate = GameConstants.STARTING_GATHER_RATHER_SOLDIER;
     private int soldierFoodPrice = GameConstants.STARTING_SOLDIER_FOOD_PRICE;
     private int soldierGoldPrice = GameConstants.STARTING_SOLDIER_GOLD_PRICE;
+
+    private TownCentre town = new TownCentre(0,0,0);
     Person p;
 
     @BeforeEach
@@ -32,9 +35,7 @@ public class TestPerson {
                 villagerMaxHealth,
                 villagerAttack,
                 villagerGatherRate,
-                0,
-                0,
-                null);
+                town);
     }
 
     @Test
@@ -44,12 +45,11 @@ public class TestPerson {
                 villagerMaxHealth,
                 villagerAttack,
                 villagerGatherRate,
-                0,
-                0,
-null));    }
-
+                town));    }
+    @Test
     void testWalk() {
-        p.walk(1,2);
+        p.walkTo(1,2);
+        assertEquals(p.getPos(),new Position(1,2));
 
     }
 }

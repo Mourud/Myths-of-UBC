@@ -16,8 +16,6 @@ public abstract class ResourceHotSpot implements GameObject {
         return resourceRemaining;
     }
 
-    //TODO: SUBSTRACT WITH GATHER RATE
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -35,7 +33,6 @@ public abstract class ResourceHotSpot implements GameObject {
         return Objects.hash(resourceRemaining);
     }
 
-// todo: protected doesn't work?
     public boolean decrementResourceLeft(int gatherRate) {
         if (resourceRemaining > 0) {
             resourceRemaining -= gatherRate;

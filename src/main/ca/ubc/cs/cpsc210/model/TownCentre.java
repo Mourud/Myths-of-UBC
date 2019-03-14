@@ -1,10 +1,11 @@
 package ca.ubc.cs.cpsc210.model;
 
-import ca.ubc.cs.cpsc210.model.GameObject;
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 import ca.ubc.cs.cpsc210.model.person.Registry;
 import ca.ubc.cs.cpsc210.model.person.Soldier;
 import ca.ubc.cs.cpsc210.model.person.Villager;
+
+import java.util.Objects;
 
 public class TownCentre implements GameObject {
 
@@ -24,15 +25,11 @@ public class TownCentre implements GameObject {
     private int soldierFoodPrice = GameConstants.STARTING_SOLDIER_FOOD_PRICE;
     private int soldierGoldPrice = GameConstants.STARTING_SOLDIER_GOLD_PRICE;
 
-    // TODO: Change position of Town Centre?
-    // TODO: Should Town Centre coordinates be public/ private?
-    // TOWN CENTRE STATS
-
     // FIELDS
     private int amountFood;
     private int amountGold;
     private Registry registry = new Registry();
-    private int id = 0;
+    private int personID = 0;
 
     // REQUIRES: (startPop, startFood, startGold) > 0
     // MODIFIES: this
@@ -40,16 +37,15 @@ public class TownCentre implements GameObject {
     //  startFood amount of food,
     //  startGold amount of gold,
     //  startPop amount of Villagers
+
     public TownCentre(int startPop, int startFood, int startGold) {
         for (int i = 0; i < startPop; i++) {
-            id++;
+            personID++;
             registry.add(new Villager(
-                    id,
+                    personID,
                     villagerMaxHealth,
                     villagerAttack,
                     villagerGatherRate,
-                    makeNewPos(),
-                    makeNewPos(),
                     this
             ));
         }
@@ -61,16 +57,14 @@ public class TownCentre implements GameObject {
     // MODIFIES: this
     // EFFECTS: 1. adds new villager to the registry
     //          2. reduces amountFood by villagerFoodPrices
-    public boolean procreateVillager() {
+    public boolean procreateVillager() /*throws NegativeResourceException */ {
         if (amountFood >= villagerFoodPrice && amountGold >= villagerGoldPrice) {
-            id++;
+            personID++;
             registry.add(new Villager(
-                    id,
+                    personID,
                     villagerMaxHealth,
                     villagerAttack,
                     villagerGatherRate,
-                    makeNewPos(),
-                    makeNewPos(),
                     this
             ));
             amountFood -= villagerFoodPrice;
@@ -86,14 +80,12 @@ public class TownCentre implements GameObject {
     //          2. reduces amountFood by soldierFoodPrices
     public boolean procreateSoldier() {
         if (amountFood >= soldierFoodPrice && amountGold >= soldierGoldPrice) {
-            id++;
+            personID++;
             registry.add(new Soldier(
-                    id,
+                    personID,
                     soldierMaxHealth,
                     soldierAttack,
                     soldierGatherRate,
-                    makeNewPos(),
-                    makeNewPos(),
                     this));
             amountFood -= soldierFoodPrice;
             amountGold -= soldierGoldPrice;
@@ -103,22 +95,17 @@ public class TownCentre implements GameObject {
         }
     }
 
-    // TODO: Implement this
-    // EFFECTS: Generates random position values
-    private int makeNewPos() {
-        return 0;
-    }
-
     // MODIFIES: this
     // EFFECTS: adds resource to the current resourceAmount
-    // TODO: Implement this
-    // TODO: Should Resource be a class in itself so I could just add resources?
+    //          reduces resources in ResourceHotSpot
     public void gatherResource(String resourceName, int gatherRate) {
         if (gatherRate != 0) {
             if (resourceName.equals("G")) {
                 amountGold += gatherRate;
+                Game.goldMine.decrementResourceLeft(gatherRate);
             } else if (resourceName.equals("F")) {
                 amountFood += gatherRate;
+                Game.farm.decrementResourceLeft(gatherRate);
             } else {
                 System.out.println("INVALID");
             }
@@ -150,4 +137,5 @@ public class TownCentre implements GameObject {
     public int getPopSize() {
         return registry.size();
     }
+
 }

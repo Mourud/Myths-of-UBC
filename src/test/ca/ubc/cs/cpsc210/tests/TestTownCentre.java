@@ -49,7 +49,7 @@ public class TestTownCentre {
     public void testProcreateMultipleVillager() {
         for (int i = 0; i < NO_OF_VILLAGERS; i++) {
             assertTrue(myCentre.procreateVillager());
-            System.out.println(i+"\t" + myCentre.getPopSize()+"\t"+myCentre.getAmountFood());
+//            System.out.println(i+"\t" + myCentre.getPopSize()+"\t"+myCentre.getAmountFood());
 
         }
         assertEquals(myCentre.getPopSize(), EASY_START_POP + NO_OF_VILLAGERS);
@@ -60,7 +60,7 @@ public class TestTownCentre {
     public void testProcreateMaxMultipleVillager() {
         for (int i = 0; i < (EASY_START_RESOURCES / VILLAGER_FOOD_PRICE); i++) {
             assertTrue(myCentre.procreateVillager());
-            System.out.println(i+"\t" + myCentre.getPopSize()+"\t"+myCentre.getAmountFood());
+//            System.out.println(i+"\t" + myCentre.getPopSize()+"\t"+myCentre.getAmountFood());
         }
         assertEquals(myCentre.getPopSize(), EASY_START_POP + (EASY_START_RESOURCES / VILLAGER_FOOD_PRICE));
         assertEquals(myCentre.getAmountFood(), 0);

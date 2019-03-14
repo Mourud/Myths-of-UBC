@@ -5,18 +5,21 @@ import ca.ubc.cs.cpsc210.model.resourcehotspot.Farm;
 import ca.ubc.cs.cpsc210.model.resourcehotspot.GoldMine;
 import ca.ubc.cs.cpsc210.model.resourcehotspot.ResourceHotSpot;
 
+import java.util.Objects;
+
+//TODO: Json parsers
+//TODO: Complete testing and documenting
 public class Game {
 
     // CONSTANTS
-    // Does enemy need a seperate class?
 
     // LEVEL1 GAME SETTINGS
-    public static final String LEVEL1 = GameConstants.LEVEL1;
+    private static final String LEVEL1 = GameConstants.LEVEL1;
     private static final int EASY_START_POP = GameConstants.EASY_START_POP;
     private static final int EASY_START_RESOURCES = GameConstants.EASY_START_RESOURCES;
 
     // LEVEL2 GAME SETTINGS
-    public static final String LEVEL2 = GameConstants.LEVEL2;
+    private static final String LEVEL2 = GameConstants.LEVEL2;
     private static final int MEDIUM_START_POP = GameConstants.MEDIUM_START_POP;
     private static final int MEDIUM_START_RESOURCES = GameConstants.MEDIUM_START_RESOURCES;
 
@@ -25,11 +28,12 @@ public class Game {
     private static final int HARD_START_POP = GameConstants.HARD_START_POP;
     private static final int HARD_START_RESOURCES = GameConstants.HARD_START_RESOURCES;
 
-    private TownCentre playerTown;
-    private TownCentre enemyTown;
-    private ResourceHotSpot goldMine;
-    private ResourceHotSpot farm;
-    private ResourceHotSpot forests;
+    static ResourceHotSpot goldMine = new GoldMine();
+    static ResourceHotSpot farm = new Farm();
+
+    private  TownCentre playerTown;
+    private  TownCentre enemyTown;
+
 
     // REQUIRES: valid difficulty
     // MODIFIES: this
@@ -44,8 +48,6 @@ public class Game {
         } else {
             System.out.println("Invalid");
         }
-        farm = new Farm();
-        goldMine = new GoldMine();
         //forests = new Forest();
     }
 
@@ -62,5 +64,23 @@ public class Game {
 
     public TownCentre getPlayerTown() {
         return playerTown;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Game)) {
+            return false;
+        }
+        Game game = (Game) o;
+        return Objects.equals(playerTown, game.playerTown)
+                && Objects.equals(enemyTown, game.enemyTown);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerTown, enemyTown);
     }
 }

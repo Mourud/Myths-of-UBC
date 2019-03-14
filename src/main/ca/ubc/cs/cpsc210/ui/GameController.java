@@ -1,4 +1,4 @@
-package ca.ubc.cs.cpsc210.controller;
+package ca.ubc.cs.cpsc210.ui;
 
 import ca.ubc.cs.cpsc210.model.Game;
 
