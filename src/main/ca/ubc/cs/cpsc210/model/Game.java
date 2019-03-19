@@ -28,9 +28,9 @@ public class Game {
     private static final int HARD_START_POP = GameConstants.HARD_START_POP;
     private static final int HARD_START_RESOURCES = GameConstants.HARD_START_RESOURCES;
 
-    static ResourceHotSpot goldMine = new GoldMine();
-    static ResourceHotSpot farm = new Farm();
-
+    //fields
+    public static ResourceHotSpot goldMine = new GoldMine();
+    public static ResourceHotSpot farm = new Farm();
     private  TownCentre playerTown;
     private  TownCentre enemyTown;
 

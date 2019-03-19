@@ -54,7 +54,6 @@ public abstract class Person implements GameObject {
         while (health > 0) {
             health -= attackRate;
         }
-        // TODO: Is if statement redundant
         if (health < 0) {
             health = 0;
             this.die();

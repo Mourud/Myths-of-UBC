@@ -1,10 +1,13 @@
 package ca.ubc.cs.cpsc210.model;
 
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
+import ca.ubc.cs.cpsc210.model.person.Person;
 import ca.ubc.cs.cpsc210.model.person.Registry;
 import ca.ubc.cs.cpsc210.model.person.Soldier;
 import ca.ubc.cs.cpsc210.model.person.Villager;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class TownCentre implements GameObject {
@@ -28,6 +31,7 @@ public class TownCentre implements GameObject {
     // FIELDS
     private int amountFood;
     private int amountGold;
+    //TODO: Map for ID?
     private Registry registry = new Registry();
     private int personID = 0;
 
@@ -137,5 +141,13 @@ public class TownCentre implements GameObject {
     public int getPopSize() {
         return registry.size();
     }
+
+    public int getPersonID() {
+        return personID;
+    }
+
+//    public List getPersons() {
+//        return (List) Collections.unmodifiableList(registry);
+//    }
 
 }

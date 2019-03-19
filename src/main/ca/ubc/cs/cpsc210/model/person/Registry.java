@@ -11,6 +11,8 @@ public class Registry implements Iterable<Person> {
         super();
     }
 
+
+
     public boolean add(Person person) {
         return population.add(person);
     }
