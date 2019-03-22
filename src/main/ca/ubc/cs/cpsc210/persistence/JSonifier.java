@@ -1,6 +1,7 @@
 package ca.ubc.cs.cpsc210.persistence;
 
 import ca.ubc.cs.cpsc210.model.Game;
+import ca.ubc.cs.cpsc210.model.Position;
 import ca.ubc.cs.cpsc210.model.TownCentre;
 import ca.ubc.cs.cpsc210.model.person.Person;
 import ca.ubc.cs.cpsc210.model.person.Registry;
@@ -13,13 +14,19 @@ public class JSonifier {
     public static JSONObject personToJson(Person p){
         JSONObject savePerson = new JSONObject();
 
-        savePerson.put("pos",p.getPos());
+        savePerson.put("id",p.getId());
+        savePerson.put("gatherRate",p.getGatherRate());
+        savePerson.put("nearResource", p.isNearResource());
+        savePerson.put("id",p.getId());
+        savePerson.put("posX",p.getPos().getPosX());
+        savePerson.put("posY",p.getPos().getPosY());
         savePerson.put("attack",p.getAttack());
         savePerson.put("curMaxHealth",p.getCurMaxHealth());
         savePerson.put("Health",p.getHealth());
 
         return savePerson;
     }
+
 
     private static JSONArray registryToJson(Registry r){
         JSONArray saveRegistry = new JSONArray();
@@ -39,7 +46,6 @@ public class JSonifier {
         saveTown.put("amountGold",t.getAmountGold());
         saveTown.put("registry",registryToJson(t.getRegistry()));
         saveTown.put("personID",t.getPersonID());
-
 
         return saveTown;
     }

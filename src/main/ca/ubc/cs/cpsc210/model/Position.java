@@ -9,6 +9,14 @@ public class Position {
     private int posX;
     private int posY;
 
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
     public Position(int x, int y) {
         posX = x;
         posY = y;

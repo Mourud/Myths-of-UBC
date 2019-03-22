@@ -8,7 +8,7 @@ public class GameConstants {
     // CONSTANTS
 
         // GAME TITLE
-    public static final String TITLE = "The Myth";
+    public static final String TITLE = "The Myths of UBC";
     public static final String CUSTOM = "C";
 
     // DISPLAY

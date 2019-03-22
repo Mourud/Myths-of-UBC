@@ -64,6 +64,7 @@ public abstract class Person implements GameObject {
         myTown.getRegistry().remove(this);
     }
 
+
     // MODIFIES: this
     // EFFECTS: getters and setters for given field
     public int getHealth() {
@@ -78,9 +79,22 @@ public abstract class Person implements GameObject {
         return attack;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public int getGatherRate() {
+        return gatherRate;
+    }
+
+    public boolean isNearResource() {
+        return nearResource;
+    }
+
     public Position getPos() {
         return pos;
     }
+
 
     @Override
     public boolean equals(Object o) {

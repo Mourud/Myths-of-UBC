@@ -7,6 +7,10 @@ import ca.ubc.cs.cpsc210.model.resourcehotspot.ResourceHotSpot;
 import ca.ubc.cs.cpsc210.persistence.JSonifier;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 //TODO: Json parsers
@@ -50,7 +54,7 @@ public class Game {
             setTowns(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
         } else if (difficulty.equals(LEVEL3)) {
             setTowns(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
-        } //else if (difficulty.equals(CUSTOM)) { }
+        } else if (difficulty.equals(CUSTOM)) { }
         else {
             System.out.println("Invalid");
         }
@@ -64,12 +68,7 @@ public class Game {
         enemyTown = new TownCentre(pop, food, gold);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS: converts game to JSON object
-    public void saveGame(){
-        JSONObject savedGame = JSonifier.gameToJson(this);
-    }
+
 
 
     public TownCentre getEnemyTown() {
