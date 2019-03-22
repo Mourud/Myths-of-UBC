@@ -76,6 +76,7 @@ public class GameController {
         }
     }
 
+
     public static void makeNewGame(String s)  {
         game = new Game(s);
         System.out.println(s + " game");
