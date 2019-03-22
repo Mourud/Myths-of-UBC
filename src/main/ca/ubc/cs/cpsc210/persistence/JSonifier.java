@@ -1,4 +1,4 @@
-package ca.ubc.cs.cpsc210.parsers;
+package ca.ubc.cs.cpsc210.persistence;
 
 import ca.ubc.cs.cpsc210.model.Game;
 import ca.ubc.cs.cpsc210.model.TownCentre;
@@ -21,7 +21,7 @@ public class JSonifier {
         return savePerson;
     }
 
-    public static JSONArray registryToJson(Registry r){
+    private static JSONArray registryToJson(Registry r){
         JSONArray saveRegistry = new JSONArray();
 
         for(Person p : r){
@@ -31,7 +31,7 @@ public class JSonifier {
         return saveRegistry;
     }
 
-    public static JSONObject townToJson(TownCentre t){
+    private static JSONObject townToJson(TownCentre t){
 
         JSONObject saveTown = new JSONObject();
 
@@ -44,7 +44,7 @@ public class JSonifier {
         return saveTown;
     }
 
-    public static JSONObject resourceHotSpotToJson(ResourceHotSpot r){
+    private static JSONObject resourceHotSpotToJson(ResourceHotSpot r){
         JSONObject saveResourceHotSpot = new JSONObject();
 
         saveResourceHotSpot.put("resourceRemaining",r.getResourceRemaining());

@@ -4,6 +4,8 @@ import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 import ca.ubc.cs.cpsc210.model.resourcehotspot.Farm;
 import ca.ubc.cs.cpsc210.model.resourcehotspot.GoldMine;
 import ca.ubc.cs.cpsc210.model.resourcehotspot.ResourceHotSpot;
+import ca.ubc.cs.cpsc210.persistence.JSonifier;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -28,13 +30,16 @@ public class Game {
     private static final int HARD_START_POP = GameConstants.HARD_START_POP;
     private static final int HARD_START_RESOURCES = GameConstants.HARD_START_RESOURCES;
 
+    // LOAD GAME
+    public static final String CUSTOM = GameConstants.CUSTOM;
+
     //fields
     public static ResourceHotSpot goldMine = new GoldMine();
     public static ResourceHotSpot farm = new Farm();
     private  TownCentre playerTown;
     private  TownCentre enemyTown;
 
-
+    //try catch
     // REQUIRES: valid difficulty
     // MODIFIES: this
     // EFFECTS: makes game depending on difficulty
@@ -45,18 +50,27 @@ public class Game {
             setTowns(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
         } else if (difficulty.equals(LEVEL3)) {
             setTowns(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
-        } else {
+        } //else if (difficulty.equals(CUSTOM)) { }
+        else {
             System.out.println("Invalid");
         }
         //forests = new Forest();
     }
 
-    // REQUIRES: (pop, food, gold) > 0
+    // REQUIRES: (pop, food, gold) >= 0
     // EFFECTS: sets game with give population, food
-    public void setTowns(int pop, int food, int gold) {
+    private void setTowns(int pop, int food, int gold) {
         playerTown = new TownCentre(pop, food, gold);
         enemyTown = new TownCentre(pop, food, gold);
     }
+
+    // REQUIRES:
+    // MODIFIES:
+    // EFFECTS: converts game to JSON object
+    public void saveGame(){
+        JSONObject savedGame = JSonifier.gameToJson(this);
+    }
+
 
     public TownCentre getEnemyTown() {
         return enemyTown;

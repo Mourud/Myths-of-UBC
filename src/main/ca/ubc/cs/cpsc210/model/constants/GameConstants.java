@@ -9,10 +9,11 @@ public class GameConstants {
 
         // GAME TITLE
     public static final String TITLE = "The Myth";
+    public static final String CUSTOM = "C";
 
-        // DISPLAY
-    private static final int GAME_SCREEN_WIDTH = 1000;
-    private static final int GAME_SCREEN_HEIGHT = 1000;
+    // DISPLAY
+    public static final int GAME_SCREEN_WIDTH = 1000;
+    public static final int GAME_SCREEN_HEIGHT = 1000;
 
         // DIFFICULTY CONSTANTS
 
