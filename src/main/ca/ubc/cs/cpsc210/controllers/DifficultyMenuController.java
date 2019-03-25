@@ -13,8 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DifficultyMenuController {
-
+public class DifficultyMenuController extends SuperController {
     private static final String TITLE = GameConstants.TITLE;
     private static final String LEVEL1 = GameConstants.LEVEL1;
     private static final String LEVEL2 = GameConstants.LEVEL2;
@@ -28,30 +27,41 @@ public class DifficultyMenuController {
     private Button buttonMedium;
     @FXML
     private Button buttonHard;
+    @FXML
+    private Button mainMenu;
+    @FXML
+    private Button loadGame;
 
     @FXML
-    public void easyGame()  {
+    public void easyGame() {
         boolean confirmed = ConfirmBox.display(TITLE, "Difficulty selected: " + LEVEL1 + "\n        Are you sure?");
-        gameBuilder(LEVEL1,confirmed);
-    }
-    @FXML
-    public void mediumGame()  {
-        boolean confirmed = ConfirmBox.display(TITLE, "Difficulty selected: " + LEVEL2 + "\n        Are you sure?");
-        gameBuilder(LEVEL2,confirmed);
-    }
-    @FXML
-    public void hardGame()  {
-        boolean confirmed = ConfirmBox.display(TITLE, "Difficulty selected: " + LEVEL3 + "\n        Are you sure?");
-        gameBuilder(LEVEL3,confirmed);
+        gameBuilder(LEVEL1, confirmed);
     }
 
+    @FXML
+    public void mediumGame() {
+        boolean confirmed = ConfirmBox.display(TITLE, "Difficulty selected: " + LEVEL2 + "\n        Are you sure?");
+        gameBuilder(LEVEL2, confirmed);
+    }
+
+    @FXML
+    public void hardGame() {
+        boolean confirmed = ConfirmBox.display(TITLE, "Difficulty selected: " + LEVEL3 + "\n        Are you sure?");
+        gameBuilder(LEVEL3, confirmed);
+    }
+
+    public void goMainMenu() throws IOException {
+        setMainMenu();
+    }
+
+    public void loadGame() {
+        load();
+    }
 
     private void gameBuilder(String s, Boolean yes) {
-                if(yes){
-                    GameController.makeNewGame(s);
+        if (yes) {
+            super.makeNewGame(s);
         }
     }
-
-
 
 }

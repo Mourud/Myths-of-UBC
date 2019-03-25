@@ -6,6 +6,9 @@ import java.util.Objects;
 
 public class Position {
     private static final int BIRTH_RADIUS = GameConstants.BIRTH_RADIUS;
+    private static final int GAME_HEIGHT = GameConstants.GAME_SCREEN_HEIGHT;
+    private static final int GAME_WIDTH = GameConstants.GAME_SCREEN_WIDTH;
+
     private int posX;
     private int posY;
 
@@ -27,9 +30,14 @@ public class Position {
         posY = y;
     }
 
-    public void random() {
-        posX = (int) (Math.random() * BIRTH_RADIUS + 1);
-        posY = (int) (Math.random() * BIRTH_RADIUS + 1);
+    public void random(boolean isPlayer) {
+        if (isPlayer) {
+            posX = (int) (Math.random() * BIRTH_RADIUS + 100);
+            posY = GAME_HEIGHT - (int) (Math.random() * BIRTH_RADIUS + 1);
+        } else {
+            posX = GAME_WIDTH - (int) (Math.random() * BIRTH_RADIUS + 100);
+            posY = (int) (Math.random() * BIRTH_RADIUS + 1);
+        }
     }
 
     @Override

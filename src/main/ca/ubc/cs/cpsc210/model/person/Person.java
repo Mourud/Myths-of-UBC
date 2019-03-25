@@ -3,10 +3,17 @@ package ca.ubc.cs.cpsc210.model.person;
 import ca.ubc.cs.cpsc210.model.GameObject;
 import ca.ubc.cs.cpsc210.model.Position;
 import ca.ubc.cs.cpsc210.model.TownCentre;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.Objects;
 
-public abstract class Person implements GameObject {
+public abstract class Person extends GameObject {
+    public static final Color PLAYER_COLOR = Color.BLUE;
+    public static final Color ENEMY_COLOR = Color.DARKRED;
+
+
+    private boolean isSoldier;
     private int id;
     private int curMaxHealth;
     private int health;
@@ -17,21 +24,52 @@ public abstract class Person implements GameObject {
     private boolean nearResource;
 
 
-    public Person(int id, int curMaxHealth, int attack, int gatherRate, TownCentre t) {
+    public Person(boolean isSoldier, int id, int curMaxHealth, int attack, int gatherRate, TownCentre t) {
+        super(10, 10);
+        if (t.isPlayer()) {
+            setFill(PLAYER_COLOR);
+            pos = new Position(0, 0);
+            pos.random(true);
+        } else {
+            setFill(ENEMY_COLOR);
+            pos = new Position(0, 0);
+            pos.random(false);
+        }
+        this.isSoldier = isSoldier;
         this.id = id;
         this.curMaxHealth = curMaxHealth;
         this.health = curMaxHealth;
         this.attack = attack;
         this.gatherRate = gatherRate;
-        pos = new Position(0, 0);
-        pos.random();
+
         myTown = t;
+        nearResource = false;
+        setPos(pos);
+
+    }
+
+    public Person(boolean isSoldier, int id, int health, int curMaxHealth, int attack, int gatherRate, Position position, boolean nearResource, TownCentre t) {
+        super(10, 10);
+        if (t.isPlayer()) {
+            setFill(PLAYER_COLOR);
+        } else {
+            setFill(ENEMY_COLOR);
+        }
+        this.isSoldier = isSoldier;
+        this.id = id;
+        this.curMaxHealth = curMaxHealth;
+        this.health = health;
+        this.attack = attack;
+        this.gatherRate = gatherRate;
+        pos = position;
+        myTown = t;
+        this.nearResource = nearResource;
     }
 
     // MODIFIES: this
     // EFFECTS: changes the position of player
     public void walkTo(int x, int y) {
-        pos.changePos(x,y);
+        pos.changePos(x, y);
     }
 
 
@@ -50,6 +88,7 @@ public abstract class Person implements GameObject {
         enemy.decreaseHealth(attack);
     }
 
+
     public void decreaseHealth(int attackRate) {
         while (health > 0) {
             health -= attackRate;
@@ -61,7 +100,7 @@ public abstract class Person implements GameObject {
     }
 
     private void die() {
-        myTown.getRegistry().remove(this);
+        myTown.getRegistry().die(this);
     }
 
 
@@ -79,7 +118,7 @@ public abstract class Person implements GameObject {
         return attack;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
@@ -95,22 +134,21 @@ public abstract class Person implements GameObject {
         return pos;
     }
 
+    public boolean isSoldier() {
+        return isSoldier;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (!(o instanceof Person)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return id == person.id;
+        return id == person.id &&
+                myTown.equals(person.myTown);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, myTown);
     }
 }

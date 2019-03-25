@@ -25,7 +25,7 @@ public class TestPerson {
     private int soldierFoodPrice = GameConstants.STARTING_SOLDIER_FOOD_PRICE;
     private int soldierGoldPrice = GameConstants.STARTING_SOLDIER_GOLD_PRICE;
 
-    private TownCentre town = new TownCentre(0,0,0);
+    private TownCentre town = new TownCentre(0, 0, 0, true);
     Person p;
 
     @BeforeEach
@@ -45,11 +45,13 @@ public class TestPerson {
                 villagerMaxHealth,
                 villagerAttack,
                 villagerGatherRate,
-                town));    }
+                town));
+    }
+
     @Test
     void testWalk() {
-        p.walkTo(1,2);
-        assertEquals(p.getPos(),new Position(1,2));
+        p.walkTo(1, 2);
+        assertEquals(p.getPos(), new Position(1, 2));
 
     }
 }

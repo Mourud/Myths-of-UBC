@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class TheMythsOfUBC extends Application {
 
 
     private static Stage window;
+    private Pane root = new Pane();
 
     //EFFECTS: Starts Game
     public static void main(String[] args) {
@@ -27,6 +29,16 @@ public class TheMythsOfUBC extends Application {
     }
 
 
+    //    @Override
+//    public void start(Stage stage) throws Exception{
+//        stage.setScene(new Scene(createContent()));
+//        stage.show();
+//    }
+//
+//    private Parent createContent(){
+//        root.setPrefSize(WIDTH,HEIGHT);
+//        return root;
+//    }
     //EFFECTS: Starts Game UI
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -34,7 +46,7 @@ public class TheMythsOfUBC extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/ca/ubc/cs/cpsc210/ui/MainMenu.fxml"));
         window = primaryStage;
         window.setTitle(TITLE);
-        window.setScene(new Scene(root,HEIGHT, WIDTH));
+        window.setScene(new Scene(root, WIDTH, HEIGHT));
         window.show();
         window.setOnCloseRequest(e -> {
             e.consume();
@@ -50,24 +62,25 @@ public class TheMythsOfUBC extends Application {
         }
     }
 
-    public static void setScene(Parent root){
-        try{
-            Scene scene = new Scene(root, HEIGHT, WIDTH);
+    public static void setScene(Parent root) {
+        try {
+
+            Scene scene = new Scene(root, WIDTH, HEIGHT);
             window.setTitle(TITLE);
             window.setScene(scene);
             window.show();
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    public static void setScene(Scene scene){
-        try{
+    public static void setScene(Scene scene) {
+        try {
             window.setTitle(TITLE);
             window.setScene(scene);
             window.show();
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

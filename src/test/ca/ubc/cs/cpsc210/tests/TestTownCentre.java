@@ -19,14 +19,14 @@ public class TestTownCentre {
     private static final int SOLDIER_FOOD_PRICE = GameConstants.STARTING_SOLDIER_FOOD_PRICE;
     private static final int SOLDIER_GOLD_PRICE = GameConstants.STARTING_SOLDIER_GOLD_PRICE;
 
-    private static final int NO_OF_VILLAGERS = EASY_START_RESOURCES/VILLAGER_FOOD_PRICE;
-    private static final int NO_OF_SOLDIERS = EASY_START_RESOURCES/SOLDIER_FOOD_PRICE;
+    private static final int NO_OF_VILLAGERS = EASY_START_RESOURCES / VILLAGER_FOOD_PRICE;
+    private static final int NO_OF_SOLDIERS = EASY_START_RESOURCES / SOLDIER_FOOD_PRICE;
 
     private TownCentre myCentre;
 
     @BeforeEach
     public void TestTownCentreConstructor() {
-        myCentre = new TownCentre(EASY_START_POP,EASY_START_RESOURCES,EASY_START_RESOURCES);
+        myCentre = new TownCentre(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES, true);
 
     }
 
@@ -129,9 +129,9 @@ public class TestTownCentre {
 
     @Test
     public void testGatherResource() {
-        myCentre.gatherResource("G",1);
-        myCentre.gatherResource("G",0);
-        myCentre.gatherResource("F",1);
-        myCentre.gatherResource("F",0);
+        myCentre.gatherResource("G", 1);
+        myCentre.gatherResource("G", 0);
+        myCentre.gatherResource("F", 1);
+        myCentre.gatherResource("F", 0);
     }
 }

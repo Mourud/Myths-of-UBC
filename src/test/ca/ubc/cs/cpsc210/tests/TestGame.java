@@ -64,7 +64,7 @@ public class TestGame {
     }
 
     @Test
-    void testSetTown(){
+    void testSetTown() {
         game = new Game(LEVEL1);
         assertEquals(game.getPlayerTown().getPopSize(), EASY_START_POP);
         assertEquals(game.getPlayerTown().getAmountFood(), EASY_START_RESOURCES);

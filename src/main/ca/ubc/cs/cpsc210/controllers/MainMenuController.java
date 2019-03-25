@@ -14,7 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class MainMenuController {
+public class MainMenuController extends SuperController {
 
 
     @FXML
@@ -26,18 +26,18 @@ public class MainMenuController {
     @FXML
     private Text goldAmount;
 
-    public void startGame() throws IOException {
+    @FXML
+    public void startNewGame() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ca/ubc/cs/cpsc210/ui/DifficultyMenu.fxml"));
         TheMythsOfUBC.setScene(root);
 
     }
 
-
     public void loadGame() {
-            GameController.load();
+        super.load();
     }
 
-    public void closeGame(){
+    public void closeGame() {
         TheMythsOfUBC.closeProgram();
     }
 }

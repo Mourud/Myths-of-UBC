@@ -1,18 +1,24 @@
 package ca.ubc.cs.cpsc210.model;
 
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
-import ca.ubc.cs.cpsc210.model.person.Person;
 import ca.ubc.cs.cpsc210.model.person.Registry;
 import ca.ubc.cs.cpsc210.model.person.Soldier;
 import ca.ubc.cs.cpsc210.model.person.Villager;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-
-public class TownCentre implements GameObject {
+public class TownCentre extends GameObject {
 
     // CONSTANTS
+
+    // TOWNCENTER
+    private static final Position PLAYER_POS = GameConstants.PLAYER_TOWN_POS;
+    private static final Position ENEMY_POS = GameConstants.ENEMY_TOWN_POS;
+    private static final int SIZE = GameConstants.TOWN_SIZE;
+    private static final Color PLAYER_COLOR = GameConstants.PLAYER_COLOR;
+    private static final Color ENEMY_COLOR = GameConstants.ENEMY_COLOR;
 
     // VILLAGER STATS
     private int villagerMaxHealth = GameConstants.STARTING_MAX_HEALTH_VILLAGER;
@@ -31,21 +37,37 @@ public class TownCentre implements GameObject {
     // FIELDS
     private int amountFood;
     private int amountGold;
-    //TODO: Map for ID?
-    private Registry registry = new Registry();
+    private Registry registry;
     private int personID = 0;
+    private boolean isPlayer;
+    private Color color;
 
-    // REQUIRES: (startPop, startFood, startGold) > 0
+    public boolean isPlayer() {
+        return isPlayer;
+    }
+// REQUIRES: (startPop, startFood, startGold) > 0
     // MODIFIES: this
     // EFFECTS: constructs TownCentre with
     //  startFood amount of food,
     //  startGold amount of gold,
     //  startPop amount of Villagers
 
-    public TownCentre(int startPop, int startFood, int startGold) {
+    public TownCentre(int startPop, int startFood, int startGold, boolean isPlayer) {
+        super(SIZE, SIZE);
+        this.isPlayer = isPlayer;
+        if (isPlayer) {
+            color = PLAYER_COLOR;
+            setFill(PLAYER_COLOR);
+            setPos(PLAYER_POS);
+        } else {
+            color = ENEMY_COLOR;
+            setFill(ENEMY_COLOR);
+            setPos(ENEMY_POS);
+        }
+        registry = new Registry();
         for (int i = 0; i < startPop; i++) {
             personID++;
-            registry.add(new Villager(
+            registry.born(new Villager(
                     personID,
                     villagerMaxHealth,
                     villagerAttack,
@@ -57,6 +79,66 @@ public class TownCentre implements GameObject {
         amountGold = startGold;
     }
 
+
+    public TownCentre(JSONObject j) {
+        super(100, 100);
+        if (isPlayer) {
+            setFill(PLAYER_COLOR);
+            setPos(PLAYER_POS);
+        } else {
+            setFill(ENEMY_COLOR);
+            setPos(ENEMY_POS);
+        }
+        amountFood = j.getInt("amountFood");
+        amountGold = j.getInt("amountGold");
+        personID = j.getInt("personID");
+        JSONArray registryJson = j.getJSONArray("registry");
+        registry = new Registry();
+        for (Object object : registryJson) {
+            JSONObject personJson = (JSONObject) object;
+            int idJson = personJson.getInt("id");
+            int healthJson = personJson.getInt("Health"); // TODO: change format h
+            int curMaxHealthJson = personJson.getInt("curMaxHealth");
+            int attackJson = personJson.getInt("attack");
+            int gatherRateJson = personJson.getInt("gatherRate");
+            int posXJson = personJson.getInt("posX");
+            int posYJson = personJson.getInt("posY");
+            Position positionJson = new Position(posXJson, posYJson);
+            boolean nearResourceJson = personJson.getBoolean("nearResource");
+            boolean isSoldierJson = personJson.getBoolean("isSoldier");
+            if (!isSoldierJson) {
+                registry.born(
+                        new Villager(idJson,
+                                healthJson,
+                                curMaxHealthJson,
+                                attackJson,
+                                gatherRateJson,
+                                positionJson,
+                                nearResourceJson,
+                                this));
+            } else {
+                registry.born(
+                        new Soldier(idJson,
+                                healthJson,
+                                curMaxHealthJson,
+                                attackJson,
+                                gatherRateJson,
+                                positionJson,
+                                nearResourceJson,
+                                this));
+            }
+        }
+        //isPlayer=j.getBoolean("isPlayer"); todo:fix
+    }
+
+    private void setUpPop(JSONObject j) {
+
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
     // TODO: Use exceptions
     // MODIFIES: this
     // EFFECTS: 1. adds new villager to the registry
@@ -64,7 +146,7 @@ public class TownCentre implements GameObject {
     public boolean procreateVillager() /*throws NegativeResourceException */ {
         if (amountFood >= villagerFoodPrice && amountGold >= villagerGoldPrice) {
             personID++;
-            registry.add(new Villager(
+            registry.born(new Villager(
                     personID,
                     villagerMaxHealth,
                     villagerAttack,
@@ -85,7 +167,7 @@ public class TownCentre implements GameObject {
     public boolean procreateSoldier() {
         if (amountFood >= soldierFoodPrice && amountGold >= soldierGoldPrice) {
             personID++;
-            registry.add(new Soldier(
+            registry.born(new Soldier(
                     personID,
                     soldierMaxHealth,
                     soldierAttack,
@@ -139,15 +221,10 @@ public class TownCentre implements GameObject {
     }
 
     public int getPopSize() {
-        return registry.size();
+        return registry.population();
     }
 
     public int getPersonID() {
         return personID;
     }
-
-//    public List getPersons() {
-//        return (List) Collections.unmodifiableList(registry);
-//    }
-
 }
