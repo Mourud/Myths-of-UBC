@@ -1,9 +1,9 @@
 package ca.ubc.cs.cpsc210.tests;
 
-import ca.ubc.cs.cpsc210.model.Position;
 import ca.ubc.cs.cpsc210.model.TownCentre;
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 import ca.ubc.cs.cpsc210.model.person.Person;
+import ca.ubc.cs.cpsc210.model.person.Soldier;
 import ca.ubc.cs.cpsc210.model.person.Villager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,21 +26,27 @@ public class TestPerson {
     private int soldierGoldPrice = GameConstants.STARTING_SOLDIER_GOLD_PRICE;
 
     private TownCentre town = new TownCentre(0, 0, 0, true);
-    Person p;
+    Person v;
+    Person s;
 
     @BeforeEach
     void setUp() {
-        p = new Villager(
+        v = new Villager(
                 1,
                 villagerMaxHealth,
                 villagerAttack,
                 villagerGatherRate,
                 town);
+        s = new Soldier(2,
+                soldierMaxHealth,
+                soldierAttack,
+                soldierGatherRate,
+                town);
     }
 
     @Test
     void testConstructor() {
-        assertEquals(p, new Villager(
+        assertEquals(v, new Villager(
                 1,
                 villagerMaxHealth,
                 villagerAttack,
@@ -50,8 +56,97 @@ public class TestPerson {
 
     @Test
     void testWalk() {
-//        p.walkTo(1, 2);
-//        assertEquals(p.getPos(), new Position(1, 2));
+        v.walkTo(1, 2);
 
+    }
+
+    @Test
+    void getHealthLabel() {
+        v.getHealthLabel();
+
+    }
+
+
+    @Test
+    void gatherResource() {
+        v.gatherResource("G");
+        v.gatherResource("F");
+        v.gatherResource("A");
+    }
+
+    @Test
+    void attack() {
+        v.attack(s);
+    }
+
+    @Test
+    void decreaseHealth() {
+        s.decreaseHealth(villagerAttack);
+    }
+
+    @Test
+    void getHealth() {
+        s.getHealth();
+    }
+
+    @Test
+    void getCurMaxHealth() {
+        s.getCurMaxHealth();
+    }
+
+    @Test
+    void getAttack() {
+        s.getAttack();
+    }
+
+
+    @Test
+    void getID() {
+        s.getID();
+    }
+
+    @Test
+    void getGatherRate() {
+        s.getGatherRate();
+    }
+
+    @Test
+    void isNearResource() {
+        s.isNearResource();
+    }
+
+    @Test
+    void getPos() {
+        s.getPos();
+    }
+
+    @Test
+    void isSoldier() {
+        s.isSoldier();
+    }
+
+//    @Test
+//    void isWithinPos() {
+//        s.isWithinPos(s.getPos(), 1,2);
+//    }
+//
+//    @Test
+//    void getPersonGameZone() {
+//        s.getPersonGameZone();
+//    }
+//
+
+    @Test
+    void regenerate() {
+        v.regenerate();
+    }
+
+//    @Test
+//    void penalty() {
+//        v.
+//    }
+
+    @Test
+    void updateLabel() {
     }
 }

@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -37,7 +38,7 @@ public class GameController {
 
     private Person selected = null;
     int turnPlayed;
-    boolean playerTurn = false;
+    boolean playerTurn = true;
 
     private static Game game;
 
@@ -58,9 +59,8 @@ public class GameController {
         try {
             String s = Files.lines(path).collect(Collectors.joining());
             game = GameParser.parse(s);
-            Parent root = render(game);
-            Scene scene = TheMythsOfUbc.setScene(root);
-            updatePlayerPosition(scene);
+
+            update();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,40 +77,51 @@ public class GameController {
         } else {
             selected.walkTo(mousePos.getPosX(), mousePos.getPosY());
             Person opponent = op.findPerson(mousePos);
+
             if (opponent != null) {
                 selected.attack(opponent);
             }
             selected = null;
 
         }
+        update();
+    }
+
+    private void update() {
+        game.updateTowns();
+
+        prepareToUpdatePlayerPosition(TheMythsOfUbc.setScene(render(game)));
+
+        turnPlayed++;
+        if (game.getEnemyTown().getRegistry().isExtinct()) {
+            TheMythsOfUbc.setScene(setGameEnd("BLUE"));
+        } else if (game.getPlayerTown().getRegistry().isExtinct()) {
+            TheMythsOfUbc.setScene(setGameEnd("RED"));
+        }
+    }
+
+    private Parent setGameEnd(String player) {
+        Pane finalScreen = new StackPane();
+        Label label = new Label(player + " WON");
+        finalScreen.getChildren().add(label);
+        return finalScreen;
     }
 
 
     public void makeNewGame(String s) {
         game = new Game(s);
-        Parent root = render(game);
-        Scene scene = TheMythsOfUbc.setScene(root);
-        updatePlayerPosition(scene);
+//        Parent root = render(game);
+//        Scene scene = TheMythsOfUbc.setScene(root);
+//        prepareToUpdatePlayerPosition(scene);
+        update();
     }
 
-    private void updatePlayerPosition(Scene scene) {
+    private void prepareToUpdatePlayerPosition(Scene scene) {
         Objects.requireNonNull(scene).setOnMouseClicked(e -> mouseHandle(e));
 
     }
 
 
-
-
-    private void gameLoop(Scene scene) {
-        TownCentre t1 = game.getPlayerTown();
-        TownCentre t2 = game.getEnemyTown();
-
-        int turns = t1.getPopSize();
-        while (game.getTurnsPlayed() < turns) {
-            updatePlayerPosition(scene);
-        }
-        render(game);
-    }
 
     private Parent render(Game g) {
         Pane root = new HBox();
@@ -134,7 +145,8 @@ public class GameController {
 
     private void addPerson(Registry r, Pane map) {
         for (Person p : r) {
-            map.getChildren().add(p);
+            Label health = p.getHealthLabel();
+            map.getChildren().addAll(p, health);
         }
     }
 
@@ -146,10 +158,11 @@ public class GameController {
             } else {
                 game.getEnemyTown().procreateVillager();
             }
-            playerTurn = !playerTurn;
-            Parent root = render(game);
-            Scene scene = TheMythsOfUbc.setScene(root);
-            updatePlayerPosition(scene);
+//            playerTurn = !playerTurn;
+//            Parent root = render(game);
+//            Scene scene = TheMythsOfUbc.setScene(root);
+//            prepareToUpdatePlayerPosition(scene);
+            update();
         });
         return makeVill;
     }
@@ -163,10 +176,11 @@ public class GameController {
             } else {
                 game.getEnemyTown().procreateSoldier();
             }
-            playerTurn = !playerTurn;
-            Parent root = render(game);
-            Scene scene = TheMythsOfUbc.setScene(root);
-            updatePlayerPosition(scene);
+//            playerTurn = !playerTurn;
+//            Parent root = render(game);
+//            Scene scene = TheMythsOfUbc.setScene(root);
+//            prepareToUpdatePlayerPosition(scene);
+            update();
         });
         return makeSold;
     }

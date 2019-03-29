@@ -142,4 +142,9 @@ public class Game {
     public void incrementCounter() {
         turnsPlayed++;
     }
+
+    public void updateTowns() {
+        getPlayerTown().getRegistry().update();
+        getEnemyTown().getRegistry().update();
+    }
 }

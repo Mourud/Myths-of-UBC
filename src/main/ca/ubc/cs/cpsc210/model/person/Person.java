@@ -4,6 +4,7 @@ import ca.ubc.cs.cpsc210.model.GameObject;
 import ca.ubc.cs.cpsc210.model.Position;
 import ca.ubc.cs.cpsc210.model.TownCentre;
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
 import java.util.Objects;
@@ -29,7 +30,12 @@ public abstract class Person extends GameObject {
     private int gatherRate;
     protected TownCentre myTown;
     private boolean nearResource;
+    private Label healthLabel;
 
+
+    public Label getHealthLabel() {
+        return healthLabel;
+    }
 
     public Person(boolean isSoldier, int size, int id, int curMaxHealth, int attack, int gatherRate, TownCentre t) {
         super(size, size);
@@ -48,7 +54,7 @@ public abstract class Person extends GameObject {
         this.health = curMaxHealth;
         this.attack = attack;
         this.gatherRate = gatherRate;
-
+        healthLabel = new Label(this.health + "");
         myTown = t;
         nearResource = false;
         setPos();
@@ -72,6 +78,7 @@ public abstract class Person extends GameObject {
         pos = position;
         myTown = t;
         this.nearResource = nearResource;
+        healthLabel = new Label(this.health + "");
         setPos();
     }
 
@@ -87,8 +94,8 @@ public abstract class Person extends GameObject {
 // REQUIRES:
 // MODIFIES: myTown
 // EFFECTS: increases amount of resource that it's in contact with
-    public void gatherResource() {
-        myTown.gatherResource("", gatherRate);
+    public void gatherResource(String s) {
+        myTown.gatherResource(s, gatherRate);
     }
 
 
@@ -100,10 +107,9 @@ public abstract class Person extends GameObject {
 
 
     public void decreaseHealth(int attackRate) {
-        while (health > 0) {
-            health -= attackRate;
-        }
-        if (health < 0) {
+        health -= attackRate;
+        setPos();
+        if (health <= 0) {
             health = 0;
             this.die();
         }
@@ -170,11 +176,70 @@ public abstract class Person extends GameObject {
 
     public abstract boolean isInRange(Position position);
 
+
     public boolean isWithinPos(Position position, int size) {
         int mouseX = position.getPosX();
         int mouseY = position.getPosY();
 
         return withinX(mouseX, size) && withinY(mouseY, size);
+    }
+
+    private boolean isWithinPos(int place) {
+        switch (place) {
+            case IS_IN_TOWN:
+                return isInTown();
+            case IS_IN_FARM:
+                return isInFarm();
+            case IS_IN_GOLD_MINE:
+                return isInMine();
+            case IS_OUT_OF_TOWN:
+                if (myTown.getTranslateX() == GameConstants.PLAYER_TOWN_POS_X) {
+                    return isOutOfTownPlayer();
+                } else {
+                    return isOutOfTownEnemy();
+                }
+            default:
+                return false;
+        }
+    }
+
+    private boolean isOutOfTownEnemy() {
+        return isWithinX(GameConstants.PLAYER_TOWN_POS_X, GameConstants.TOWN_SIZE, GameConstants.TOWN_SIZE)
+                && isWithinY(GameConstants.PLAYER_TOWN_POS_Y, GameConstants.TOWN_SIZE, GameConstants.TOWN_SIZE);
+    }
+
+    private boolean isOutOfTownPlayer() {
+        return isWithinX(GameConstants.ENEMY_TOWN_POS_X, GameConstants.TOWN_SIZE, GameConstants.TOWN_SIZE)
+                && isWithinY(GameConstants.ENEMY_TOWN_POS_Y, GameConstants.TOWN_SIZE, GameConstants.TOWN_SIZE);
+    }
+
+    private boolean isInMine() {
+        return isWithinX(GameConstants.GOLD_MINE__POS_X, GameConstants.RESOURCE_HOTSPOT_WIDTH,
+                GameConstants.RESOURCE_HOTSPOT_HEIGHT)
+                && isWithinY(GameConstants.GOLD_MINE__POS_Y, GameConstants.RESOURCE_HOTSPOT_WIDTH,
+                GameConstants.RESOURCE_HOTSPOT_HEIGHT);
+    }
+
+    private boolean isInFarm() {
+        return isWithinX(GameConstants.FARM__POS_X, GameConstants.RESOURCE_HOTSPOT_WIDTH,
+                GameConstants.RESOURCE_HOTSPOT_HEIGHT)
+                && isWithinY(GameConstants.FARM__POS_Y, GameConstants.RESOURCE_HOTSPOT_WIDTH,
+                GameConstants.RESOURCE_HOTSPOT_HEIGHT);
+    }
+
+    private boolean isInTown() {
+        return isWithinX(myTown.getTranslateX(), GameConstants.TOWN_SIZE, GameConstants.TOWN_SIZE)
+                && isWithinY((int) myTown.getTranslateY(), GameConstants.TOWN_SIZE, GameConstants.TOWN_SIZE);
+    }
+
+
+    private boolean isWithinY(int posY, int width, int height) {
+
+        return pos.getPosY() >= posY && pos.getPosY() <= posY + height;
+    }
+
+    private boolean isWithinX(double posX, int width, int height) {
+        return pos.getPosY() >= posX && pos.getPosY() <= posX + width;
     }
 
     private boolean withinY(int mouseY, int size) {
@@ -203,13 +268,13 @@ public abstract class Person extends GameObject {
     }
 
     public int getPersonGameZone() {
-        if (isInTown()) {
+        if (isWithinPos(IS_IN_TOWN)) {
             return IS_IN_TOWN;
-        } else if (isOutOfTown()) {
+        } else if (isWithinPos(IS_OUT_OF_TOWN)) {
             return IS_OUT_OF_TOWN;
-        } else if (isInFarm()) {
+        } else if (isWithinPos(IS_IN_FARM)) {
             return IS_IN_FARM;
-        } else if (isInGoldMine()) {
+        } else if (isWithinPos(IS_IN_GOLD_MINE)) {
             return IS_IN_GOLD_MINE;
         } else {
             return IS_IN_BLANK;
@@ -220,24 +285,10 @@ public abstract class Person extends GameObject {
     protected void setPos() {
         super.setPos(pos);
 
-
+        healthLabel.setTranslateX(pos.getPosX() - 1);
+        healthLabel.setTranslateY(pos.getPosY() - GameConstants.VILLAGER_SIZE - 5);
     }
 
-    private boolean isInGoldMine() {
-        return false;
-    }
-
-    private boolean isInFarm() {
-        return false;
-    }
-
-    private boolean isOutOfTown() {
-        return false;
-    }
-
-    private boolean isInTown() {
-        return false;
-    }
 
     public void regenerate() {
         health += TOWN_REGEN_VALUE;
@@ -247,4 +298,7 @@ public abstract class Person extends GameObject {
         health -= TOWN_REGEN_VALUE;
     }
 
+    public void updateLabel() {
+        healthLabel.setText(health + "");
+    }
 }

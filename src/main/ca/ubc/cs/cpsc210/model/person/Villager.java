@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
 
 public class Villager extends Person {
 
-    private Color color;
     private static final int SIZE = GameConstants.VILLAGER_SIZE;
 
 
