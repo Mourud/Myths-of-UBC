@@ -33,7 +33,7 @@ public class JSonifier {
 
         for (Person p : r) {
 
-                saveRegistry.put(personToJson(p));
+            saveRegistry.put(personToJson(p));
 
         }
 
