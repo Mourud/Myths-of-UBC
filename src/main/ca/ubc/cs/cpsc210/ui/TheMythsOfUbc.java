@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 // Starts Game Application, also works as controller for MainMenu
-public class TheMythsOfUBC extends Application {
+public class TheMythsOfUbc extends Application {
 
     private static final String TITLE = GameConstants.TITLE;
     private static final int HEIGHT = GameConstants.GAME_SCREEN_HEIGHT;
@@ -21,24 +21,12 @@ public class TheMythsOfUBC extends Application {
 
 
     private static Stage window;
-    private Pane root = new Pane();
 
     //EFFECTS: Starts Game
     public static void main(String[] args) {
         launch(args);
     }
 
-
-    //    @Override
-//    public void start(Stage stage) throws Exception{
-//        stage.setScene(new Scene(createContent()));
-//        stage.show();
-//    }
-//
-//    private Parent createContent(){
-//        root.setPrefSize(WIDTH,HEIGHT);
-//        return root;
-//    }
     //EFFECTS: Starts Game UI
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -62,16 +50,17 @@ public class TheMythsOfUBC extends Application {
         }
     }
 
-    public static void setScene(Parent root) {
+    public static Scene setScene(Parent root) {
         try {
-
             Scene scene = new Scene(root, WIDTH, HEIGHT);
             window.setTitle(TITLE);
             window.setScene(scene);
             window.show();
+            return scene;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 

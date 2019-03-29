@@ -31,5 +31,4 @@ public class Registry implements Iterable<Person> {
     }
 
 
-    // TODO: Buff and nerf mechanisms
 }

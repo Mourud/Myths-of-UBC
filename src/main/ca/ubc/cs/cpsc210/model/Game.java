@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-//TODO: Json parsers
 //TODO: Complete testing and documenting
 public class Game {
 
@@ -34,7 +33,10 @@ public class Game {
     public static ResourceHotSpot goldMine;
     public static ResourceHotSpot farm;
     private TownCentre playerTown;
+    private int playerTurnCount;
     private TownCentre enemyTown;
+    private int enemyTurnCount;
+    private boolean playerTurn;
 
     //TODO: try catch
 
@@ -51,7 +53,6 @@ public class Game {
         } else {
             System.out.println("Invalid");
         }
-        //forests = new Forest();
     }
 
     public Game(JSONObject j) {
@@ -68,6 +69,20 @@ public class Game {
         farm = new Farm();
     }
 
+    private void setupGame(JSONObject j) {
+
+        JSONObject playerTownJson = j.getJSONObject("playerTown");
+        playerTown = new TownCentre(playerTownJson);
+        JSONObject enemyTownJson = j.getJSONObject("enemyTown");
+        enemyTown = new TownCentre(enemyTownJson);
+
+        JSONObject goldMineJson = j.getJSONObject("goldMine");
+        goldMine = new GoldMine(goldMineJson);
+        JSONObject farmJson = j.getJSONObject("farm");
+        farm = new Farm(farmJson);
+
+    }
+
     public ResourceHotSpot getFarm() {
         return farm;
     }
@@ -76,19 +91,7 @@ public class Game {
         return goldMine;
     }
 
-    private void setupGame(JSONObject j) {
 
-        JSONObject goldMineJson = j.getJSONObject("goldMine");
-        goldMine = new GoldMine(goldMineJson);
-        JSONObject farmJson = j.getJSONObject("farm");
-        farm = new Farm(farmJson);
-
-        JSONObject playerTownJson = j.getJSONObject("playerTown");
-        playerTown = new TownCentre(playerTownJson);
-        JSONObject enemyTownJson = j.getJSONObject("enemyTown");
-        playerTown = new TownCentre(enemyTownJson);
-
-    }
 
 
     public TownCentre getEnemyTown() {

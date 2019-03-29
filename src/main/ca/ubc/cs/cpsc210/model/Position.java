@@ -32,10 +32,10 @@ public class Position {
 
     public void random(boolean isPlayer) {
         if (isPlayer) {
-            posX = (int) (Math.random() * BIRTH_RADIUS + 100);
-            posY = GAME_HEIGHT - (int) (Math.random() * BIRTH_RADIUS + 1);
+            posX = BIRTH_RADIUS + (int) (Math.random() * BIRTH_RADIUS + 1);
+            posY = GAME_HEIGHT - (int) (Math.random() * BIRTH_RADIUS - 1);
         } else {
-            posX = GAME_WIDTH - (int) (Math.random() * BIRTH_RADIUS + 100);
+            posX = GAME_WIDTH - BIRTH_RADIUS - (int) (Math.random() * BIRTH_RADIUS - 1);
             posY = (int) (Math.random() * BIRTH_RADIUS + 1);
         }
     }

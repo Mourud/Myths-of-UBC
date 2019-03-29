@@ -21,6 +21,8 @@ public class GoldMine extends ResourceHotSpot {
 
     public GoldMine(JSONObject j) {
         super(j.getInt("resourceRemaining"));
+        setPos(POSITION);
+        setFill(GOLDMINE_COLOR);
     }
 
 

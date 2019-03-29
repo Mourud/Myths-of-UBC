@@ -1,9 +1,11 @@
 package ca.ubc.cs.cpsc210.model;
 
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
+import ca.ubc.cs.cpsc210.model.person.Person;
 import ca.ubc.cs.cpsc210.model.person.Registry;
 import ca.ubc.cs.cpsc210.model.person.Soldier;
 import ca.ubc.cs.cpsc210.model.person.Villager;
+import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import org.json.JSONArray;
@@ -81,7 +83,8 @@ public class TownCentre extends GameObject {
 
 
     public TownCentre(JSONObject j) {
-        super(100, 100);
+        super(SIZE, SIZE);
+        isPlayer = j.getBoolean("isPlayer");
         if (isPlayer) {
             setFill(PLAYER_COLOR);
             setPos(PLAYER_POS);
@@ -97,7 +100,7 @@ public class TownCentre extends GameObject {
         for (Object object : registryJson) {
             JSONObject personJson = (JSONObject) object;
             int idJson = personJson.getInt("id");
-            int healthJson = personJson.getInt("Health"); // TODO: change format h
+            int healthJson = personJson.getInt("Health");
             int curMaxHealthJson = personJson.getInt("curMaxHealth");
             int attackJson = personJson.getInt("attack");
             int gatherRateJson = personJson.getInt("gatherRate");
@@ -128,16 +131,8 @@ public class TownCentre extends GameObject {
                                 this));
             }
         }
-        //isPlayer=j.getBoolean("isPlayer"); todo:fix
     }
 
-    private void setUpPop(JSONObject j) {
-
-    }
-
-    public Color getColor() {
-        return color;
-    }
 
     // TODO: Use exceptions
     // MODIFIES: this
@@ -179,6 +174,16 @@ public class TownCentre extends GameObject {
         } else {
             return false;
         }
+    }
+
+    public Person findPerson(Position position) {
+        for (Person person : registry) {
+            if (person.isInRange(position)) {
+                return person;
+            }
+
+        }
+        return null;
     }
 
     // MODIFIES: this

@@ -3,14 +3,15 @@ package ca.ubc.cs.cpsc210.model.person;
 import ca.ubc.cs.cpsc210.model.GameObject;
 import ca.ubc.cs.cpsc210.model.Position;
 import ca.ubc.cs.cpsc210.model.TownCentre;
+import ca.ubc.cs.cpsc210.model.constants.GameConstants;
+import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.Objects;
 
 public abstract class Person extends GameObject {
-    public static final Color PLAYER_COLOR = Color.BLUE;
-    public static final Color ENEMY_COLOR = Color.DARKRED;
+    public static final Color PLAYER_COLOR = GameConstants.PLAYER_PER_COLOR;
+    public static final Color ENEMY_COLOR = GameConstants.ENEMY_PER_COLOR;
 
 
     private boolean isSoldier;
@@ -24,8 +25,8 @@ public abstract class Person extends GameObject {
     private boolean nearResource;
 
 
-    public Person(boolean isSoldier, int id, int curMaxHealth, int attack, int gatherRate, TownCentre t) {
-        super(10, 10);
+    public Person(boolean isSoldier, int size, int id, int curMaxHealth, int attack, int gatherRate, TownCentre t) {
+        super(size, size);
         if (t.isPlayer()) {
             setFill(PLAYER_COLOR);
             pos = new Position(0, 0);
@@ -48,8 +49,9 @@ public abstract class Person extends GameObject {
 
     }
 
-    public Person(boolean isSoldier, int id, int health, int curMaxHealth, int attack, int gatherRate, Position position, boolean nearResource, TownCentre t) {
-        super(10, 10);
+    public Person(boolean isSoldier, int id, int size, int health, int curMaxHealth, int attack, int gatherRate,
+                  Position position, boolean nearResource, TownCentre t) {
+        super(size, size);
         if (t.isPlayer()) {
             setFill(PLAYER_COLOR);
         } else {
@@ -64,12 +66,14 @@ public abstract class Person extends GameObject {
         pos = position;
         myTown = t;
         this.nearResource = nearResource;
+        setPos(pos);
     }
 
     // MODIFIES: this
     // EFFECTS: changes the position of player
     public void walkTo(int x, int y) {
         pos.changePos(x, y);
+        setPos(pos);
     }
 
 
@@ -138,17 +142,50 @@ public abstract class Person extends GameObject {
         return isSoldier;
     }
 
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Person person = (Person) o;
-        return id == person.id &&
-                myTown.equals(person.myTown);
+        return id == person.id
+                && myTown.equals(person.myTown);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, myTown);
+    }
+
+
+    public abstract boolean isInRange(Position position);
+
+    public boolean isWithinPos(Position position, int size) {
+        int mouseX = position.getPosX();
+        int mouseY = position.getPosY();
+
+        return withinX(mouseX, size) && withinY(mouseY, size);
+    }
+
+    private boolean withinY(int mouseY, int size) {
+        int upperY = pos.getPosY() + size;
+        int lowerY = pos.getPosY() - size;
+        return mouseY <= upperY && mouseY >= lowerY;
+    }
+
+    private boolean withinX(int mouseX, int size) {
+        int upperX = pos.getPosX() + size;
+        int lowerX = pos.getPosX() - size;
+        System.out.println(size);
+        System.out.println("position X: " + pos.getPosX()
+                + "\nposition mouseX: " + mouseX
+                + "\nupperX: " + upperX
+//                + "\nlowerX: " + lowerX
+        );
+        return mouseX <= upperX && mouseX >= lowerX;
     }
 }

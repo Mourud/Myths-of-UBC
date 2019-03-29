@@ -1,6 +1,5 @@
 package ca.ubc.cs.cpsc210.model;
 
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class GameObject extends Rectangle {
@@ -11,9 +10,11 @@ public class GameObject extends Rectangle {
         super(width, height);
     }
 
-    protected void setPos(Position Pos) {
-        setTranslateX(Pos.getPosX());
-        setTranslateY(Pos.getPosY());
+    protected void setPos(Position pos) {
+        setTranslateX(pos.getPosX());
+        setTranslateY(pos.getPosY());
+//        setX(pos.getPosX());
+//        setY(pos.getPosY());
     }
 
     void moveLeft() {

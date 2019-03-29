@@ -1,19 +1,14 @@
 package ca.ubc.cs.cpsc210.controllers;
 
-import ca.ubc.cs.cpsc210.model.Game;
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 import ca.ubc.cs.cpsc210.ui.ConfirmBox;
-import ca.ubc.cs.cpsc210.ui.TheMythsOfUBC;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DifficultyMenuController extends SuperController {
+public class DifficultyMenuController extends GameController {
     private static final String TITLE = GameConstants.TITLE;
     private static final String LEVEL1 = GameConstants.LEVEL1;
     private static final String LEVEL2 = GameConstants.LEVEL2;

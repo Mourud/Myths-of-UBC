@@ -42,10 +42,9 @@ public class GameConstants {
     public static final int GOLD_MINE__POS_Y = 0;
     public static final Position GOLD_MINE_POSITION =  new Position(GOLD_MINE__POS_X,GOLD_MINE__POS_Y);
 
-    public static final int FARM__POS_X = GAME_SCREEN_WIDTH-RESOURCE_HOTSPOT_WIDTH;
-    public static final int FARM__POS_Y = GAME_SCREEN_HEIGHT-RESOURCE_HOTSPOT_HEIGHT;
+    public static final int FARM__POS_X = GAME_SCREEN_WIDTH - RESOURCE_HOTSPOT_WIDTH;
+    public static final int FARM__POS_Y = GAME_SCREEN_HEIGHT - RESOURCE_HOTSPOT_HEIGHT;
     public static final Position FARM_POSITION =  new Position(FARM__POS_X,FARM__POS_Y);
-
 
 
     // DIFFICULTY CONSTANTS
@@ -62,19 +61,23 @@ public class GameConstants {
 
             // LEVEL3 SETTINGS
     public static final String LEVEL3 = "Hard";
-    public static final int HARD_START_POP = 2;
-    public static final int HARD_START_RESOURCES = 0;
+    public static final int HARD_START_POP = 1;
+    public static final int HARD_START_RESOURCES = 100000000;
 
         // PERSON CONSTANTS
-    public static final int BIRTH_RADIUS = 2* TOWN_SIZE ;
+    public static final int BIRTH_RADIUS = TOWN_SIZE;
+    public static final Color PLAYER_PER_COLOR = Color.BLUEVIOLET;
+    public static final Color ENEMY_PER_COLOR = Color.DARKRED;
             // VILLAGER
+    public static final int VILLAGER_SIZE = 10;
     public static final int STARTING_MAX_HEALTH_VILLAGER = 50;
     public static final int STARTING_ATTACK_VILLAGER = 1;
-    public static final int STARTING_GATHER_RATHER_VILLAGER = 1;
-    public static final int STARTING_VILLAGER_FOOD_PRICE = 100;
+    public static final int STARTING_GATHER_RATHER_VILLAGER = 5;
+    public static final int STARTING_VILLAGER_FOOD_PRICE = 10;
     public static final int STARTING_VILLAGER_GOLD_PRICE = 0;
 
             // SOLDIER
+    public static final int SOLDIER_SIZE = 20;
     public static final int STARTING_MAX_HEALTH_SOLDIER = 100;
     public static final int STARTING_ATTACK_SOLDIER = 5;
     public static final int STARTING_GATHER_RATHER_SOLDIER = 0;

@@ -20,5 +20,7 @@ public class Farm extends ResourceHotSpot {
 
     public Farm(JSONObject j) {
         super(j.getInt("resourceRemaining"));
+        setPos(POSITION);
+        setFill(FARM_COLOR);
     }
 }

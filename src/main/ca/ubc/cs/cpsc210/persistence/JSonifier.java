@@ -32,9 +32,9 @@ public class JSonifier {
         JSONArray saveRegistry = new JSONArray();
 
         for (Person p : r) {
-            if (!p.isSoldier()) {
+
                 saveRegistry.put(personToJson(p));
-            }
+
         }
 
         return saveRegistry;

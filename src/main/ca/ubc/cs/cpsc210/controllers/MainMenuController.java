@@ -1,20 +1,16 @@
 package ca.ubc.cs.cpsc210.controllers;
 
-import ca.ubc.cs.cpsc210.model.Game;
-import ca.ubc.cs.cpsc210.parsers.GameParser;
-import ca.ubc.cs.cpsc210.ui.TheMythsOfUBC;
+import ca.ubc.cs.cpsc210.ui.TheMythsOfUbc;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-public class MainMenuController extends SuperController {
+public class MainMenuController extends GameController {
 
 
     @FXML
@@ -29,7 +25,7 @@ public class MainMenuController extends SuperController {
     @FXML
     public void startNewGame() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/ca/ubc/cs/cpsc210/ui/DifficultyMenu.fxml"));
-        TheMythsOfUBC.setScene(root);
+        TheMythsOfUbc.setScene(root);
 
     }
 
@@ -38,6 +34,6 @@ public class MainMenuController extends SuperController {
     }
 
     public void closeGame() {
-        TheMythsOfUBC.closeProgram();
+        TheMythsOfUbc.closeProgram();
     }
 }
