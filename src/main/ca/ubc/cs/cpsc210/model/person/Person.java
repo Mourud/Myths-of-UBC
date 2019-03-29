@@ -4,14 +4,20 @@ import ca.ubc.cs.cpsc210.model.GameObject;
 import ca.ubc.cs.cpsc210.model.Position;
 import ca.ubc.cs.cpsc210.model.TownCentre;
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
-import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
 public abstract class Person extends GameObject {
-    public static final Color PLAYER_COLOR = GameConstants.PLAYER_PER_COLOR;
-    public static final Color ENEMY_COLOR = GameConstants.ENEMY_PER_COLOR;
+    private static final Color PLAYER_COLOR = GameConstants.PLAYER_PER_COLOR;
+    private static final Color ENEMY_COLOR = GameConstants.ENEMY_PER_COLOR;
+
+    private static final int IS_IN_BLANK = GameConstants.IS_IN_BLANK_CODE;
+    private static final int IS_IN_TOWN = GameConstants.IS_IN_TOWN_CODE;
+    private static final int IS_OUT_OF_TOWN = GameConstants.IS_OUT_OF_TOWN_CODE;
+    private static final int IS_IN_FARM = GameConstants.IS_IN_FARM_CODE;
+    private static final int IS_IN_GOLD_MINE = GameConstants.IS_IN_GOLD_MINE_CODE;
+    private static final int TOWN_REGEN_VALUE = GameConstants.TOWN_REGEN_VALUE;
 
 
     private boolean isSoldier;
@@ -45,7 +51,7 @@ public abstract class Person extends GameObject {
 
         myTown = t;
         nearResource = false;
-        setPos(pos);
+        setPos();
 
     }
 
@@ -66,14 +72,14 @@ public abstract class Person extends GameObject {
         pos = position;
         myTown = t;
         this.nearResource = nearResource;
-        setPos(pos);
+        setPos();
     }
 
     // MODIFIES: this
     // EFFECTS: changes the position of player
     public void walkTo(int x, int y) {
         pos.changePos(x, y);
-        setPos(pos);
+        setPos();
     }
 
 
@@ -173,8 +179,15 @@ public abstract class Person extends GameObject {
 
     private boolean withinY(int mouseY, int size) {
         int upperY = pos.getPosY() + size;
-        int lowerY = pos.getPosY() - size;
+        int lowerY = pos.getPosY();
+        System.out.println(size);
+        System.out.println("position Y: " + pos.getPosY()
+                + "\nposition mouseY: " + mouseY
+                + "\nupperY: " + upperY
+                + "\nlowerY: " + lowerY
+        );
         return mouseY <= upperY && mouseY >= lowerY;
+
     }
 
     private boolean withinX(int mouseX, int size) {
@@ -184,8 +197,54 @@ public abstract class Person extends GameObject {
         System.out.println("position X: " + pos.getPosX()
                 + "\nposition mouseX: " + mouseX
                 + "\nupperX: " + upperX
-//                + "\nlowerX: " + lowerX
+                + "\nlowerX: " + lowerX
         );
         return mouseX <= upperX && mouseX >= lowerX;
     }
+
+    public int getPersonGameZone() {
+        if (isInTown()) {
+            return IS_IN_TOWN;
+        } else if (isOutOfTown()) {
+            return IS_OUT_OF_TOWN;
+        } else if (isInFarm()) {
+            return IS_IN_FARM;
+        } else if (isInGoldMine()) {
+            return IS_IN_GOLD_MINE;
+        } else {
+            return IS_IN_BLANK;
+        }
+    }
+
+
+    protected void setPos() {
+        super.setPos(pos);
+
+
+    }
+
+    private boolean isInGoldMine() {
+        return false;
+    }
+
+    private boolean isInFarm() {
+        return false;
+    }
+
+    private boolean isOutOfTown() {
+        return false;
+    }
+
+    private boolean isInTown() {
+        return false;
+    }
+
+    public void regenerate() {
+        health += TOWN_REGEN_VALUE;
+    }
+
+    public void penalty() {
+        health -= TOWN_REGEN_VALUE;
+    }
+
 }

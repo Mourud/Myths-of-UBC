@@ -36,14 +36,26 @@ public class Game {
     private int playerTurnCount;
     private TownCentre enemyTown;
     private int enemyTurnCount;
-    private boolean playerTurn;
+    private boolean isPlayerTurn;
+    private int turnsPlayed;
 
-    //TODO: try catch
+    public int getPlayerTurnCount() {
+        return playerTurnCount;
+    }
+
+    public int getEnemyTurnCount() {
+        return enemyTurnCount;
+    }
+
+    public boolean isPlayerTurn() {
+        return isPlayerTurn;
+    }
 
     // REQUIRES: valid difficulty
     // MODIFIES: this
     // EFFECTS: makes game depending on difficulty
     public Game(String difficulty) {
+        isPlayerTurn = true;
         if (difficulty.equals(LEVEL1)) {
             setupGame(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
         } else if (difficulty.equals(LEVEL2)) {
@@ -70,6 +82,7 @@ public class Game {
     }
 
     private void setupGame(JSONObject j) {
+        //isPlayerTurn = j.getBoolean("isPlayerTurn");
 
         JSONObject playerTownJson = j.getJSONObject("playerTown");
         playerTown = new TownCentre(playerTownJson);
@@ -90,8 +103,6 @@ public class Game {
     public ResourceHotSpot getGoldMine() {
         return goldMine;
     }
-
-
 
 
     public TownCentre getEnemyTown() {
@@ -118,5 +129,17 @@ public class Game {
     @Override
     public int hashCode() {
         return Objects.hash(playerTown, enemyTown);
+    }
+
+    public void initializeCounter() {
+        turnsPlayed = 0;
+    }
+
+    public int getTurnsPlayed() {
+        return turnsPlayed;
+    }
+
+    public void incrementCounter() {
+        turnsPlayed++;
     }
 }

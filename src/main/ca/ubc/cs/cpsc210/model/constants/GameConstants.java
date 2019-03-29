@@ -79,10 +79,16 @@ public class GameConstants {
             // SOLDIER
     public static final int SOLDIER_SIZE = 20;
     public static final int STARTING_MAX_HEALTH_SOLDIER = 100;
-    public static final int STARTING_ATTACK_SOLDIER = 5;
+    public static final int STARTING_ATTACK_SOLDIER = 10;
     public static final int STARTING_GATHER_RATHER_SOLDIER = 0;
     public static final int STARTING_SOLDIER_FOOD_PRICE = 10;
     public static final int STARTING_SOLDIER_GOLD_PRICE = 10;
 
-
+    public static final int IS_IN_BLANK_CODE = 0;
+    public static final int IS_IN_TOWN_CODE = 1;
+    public static final int IS_OUT_OF_TOWN_CODE = 2;
+    public static final int IS_IN_FARM_CODE = 3;
+    public static final int IS_IN_GOLD_MINE_CODE = 4;
+    public static final int IS_IN_WAR_CODE = 5;
+    public static final int TOWN_REGEN_VALUE = 10;
 }

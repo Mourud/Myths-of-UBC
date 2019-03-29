@@ -1,7 +1,6 @@
 package ca.ubc.cs.cpsc210.controllers;
 
 import ca.ubc.cs.cpsc210.model.Game;
-import ca.ubc.cs.cpsc210.model.GameObject;
 import ca.ubc.cs.cpsc210.model.Position;
 import ca.ubc.cs.cpsc210.model.TownCentre;
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
@@ -29,9 +28,16 @@ import java.util.stream.Collectors;
 
 public class GameController {
 
-    private static final int WIDTH = GameConstants.GAME_SCREEN_WIDTH;
-    private static final int HEIGHT = GameConstants.GAME_SCREEN_HEIGHT;
+    private static final int IS_IN_BLANK = GameConstants.IS_IN_BLANK_CODE;
+    private static final int IS_IN_TOWN = GameConstants.IS_IN_TOWN_CODE;
+    private static final int IS_OUT_OF_TOWN = GameConstants.IS_OUT_OF_TOWN_CODE;
+    private static final int IS_IN_FARM = GameConstants.IS_IN_FARM_CODE;
+    private static final int IS_IN_GOLD_MINE = GameConstants.IS_IN_GOLD_MINE_CODE;
+    private static final int IS_IN_WAR = GameConstants.IS_IN_WAR_CODE;
+
     private Person selected = null;
+    int turnPlayed;
+    boolean playerTurn = false;
 
     private static Game game;
 
@@ -54,22 +60,28 @@ public class GameController {
             game = GameParser.parse(s);
             Parent root = render(game);
             Scene scene = TheMythsOfUbc.setScene(root);
-            Objects.requireNonNull(scene).setOnMouseClicked(this::mouseHandle);
+            updatePlayerPosition(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void mouseHandle(MouseEvent e) {
-        TownCentre t = game.getPlayerTown();
         Position mousePos = new Position((int) e.getSceneX(), (int) e.getSceneY());
+        TownCentre player = game.getPlayerTown();
+        TownCentre op = game.getEnemyTown();
         if ((selected == (null))) {
-            if (t.findPerson(mousePos) != null) {
-                selected = t.findPerson(mousePos);
+            if (player.findPerson(mousePos) != null) {
+                selected = player.findPerson(mousePos);
             }
         } else {
-            selected.walkTo(mousePos.getPosX(),mousePos.getPosY());
+            selected.walkTo(mousePos.getPosX(), mousePos.getPosY());
+            Person opponent = op.findPerson(mousePos);
+            if (opponent != null) {
+                selected.attack(opponent);
+            }
             selected = null;
+
         }
     }
 
@@ -78,7 +90,26 @@ public class GameController {
         game = new Game(s);
         Parent root = render(game);
         Scene scene = TheMythsOfUbc.setScene(root);
-        Objects.requireNonNull(scene).setOnMouseClicked(this::mouseHandle);
+        updatePlayerPosition(scene);
+    }
+
+    private void updatePlayerPosition(Scene scene) {
+        Objects.requireNonNull(scene).setOnMouseClicked(e -> mouseHandle(e));
+
+    }
+
+
+
+
+    private void gameLoop(Scene scene) {
+        TownCentre t1 = game.getPlayerTown();
+        TownCentre t2 = game.getEnemyTown();
+
+        int turns = t1.getPopSize();
+        while (game.getTurnsPlayed() < turns) {
+            updatePlayerPosition(scene);
+        }
+        render(game);
     }
 
     private Parent render(Game g) {
@@ -87,7 +118,6 @@ public class GameController {
         map.getChildren().addAll(g.getPlayerTown(), g.getEnemyTown(), g.getFarm(), g.getGoldMine());
         addPerson(g.getPlayerTown().getRegistry(), map);
         addPerson(g.getEnemyTown().getRegistry(), map);
-
         Pane interFace = new HBox();
         interFace.getChildren().addAll(
                 foodAmount(g),
@@ -99,10 +129,6 @@ public class GameController {
                 setLoadButton(),
                 mainMenu());
         root.getChildren().addAll(map, interFace);
-//        GameObject gtest = new GameObject(10,10);
-//        gtest.setX(0);
-//        gtest.setY(0);
-//        map.getChildren().add(gtest);
         return root;
     }
 
@@ -114,13 +140,34 @@ public class GameController {
 
     private Button makeVill() {
         Button makeVill = new Button("Villager");
-        makeVill.setOnAction(e -> game.getPlayerTown().procreateVillager());
+        makeVill.setOnAction(e -> {
+            if (playerTurn) {
+                game.getPlayerTown().procreateVillager();
+            } else {
+                game.getEnemyTown().procreateVillager();
+            }
+            playerTurn = !playerTurn;
+            Parent root = render(game);
+            Scene scene = TheMythsOfUbc.setScene(root);
+            updatePlayerPosition(scene);
+        });
         return makeVill;
     }
 
+
     private Button makeSold() {
         Button makeSold = new Button("Soldier");
-        makeSold.setOnAction(e -> game.getPlayerTown().procreateSoldier());
+        makeSold.setOnAction(e -> {
+            if (playerTurn) {
+                game.getPlayerTown().procreateSoldier();
+            } else {
+                game.getEnemyTown().procreateSoldier();
+            }
+            playerTurn = !playerTurn;
+            Parent root = render(game);
+            Scene scene = TheMythsOfUbc.setScene(root);
+            updatePlayerPosition(scene);
+        });
         return makeSold;
     }
 
