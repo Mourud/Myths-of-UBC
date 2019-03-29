@@ -103,12 +103,21 @@ public class GameController {
         System.out.println("TurnPlaued : " + turnPlayed);
         if (turnPlayed >= turnLimit) {
             playerTurn = !playerTurn;
+            incrementResources();
             turnPlayed = 0;
             setTurnLimit();
         }
         game.updateTowns();
         prepareToUpdatePlayerPosition(TheMythsOfUbc.setScene(render(game)));
         checkGameOver();
+    }
+
+    private void incrementResources() {
+        if (playerTurn) {
+            game.getPlayerTown().incrementResources();
+        } else {
+            game.getEnemyTown().incrementResources();
+        }
     }
 
     private void setTurnLimit() {
@@ -142,9 +151,6 @@ public class GameController {
 
     public void makeNewGame(String s) {
         game = new Game(s);
-//        Parent root = render(game);
-//        Scene scene = TheMythsOfUbc.setScene(root);
-//        prepareToUpdatePlayerPosition(scene);
         update();
     }
 
@@ -163,8 +169,8 @@ public class GameController {
         Pane interFace = new HBox();
         interFace.getChildren().addAll(turnDisplay(),
                 foodAmount(g),
-                blankSpace(),
                 goldAmount(g),
+                popCount(g),
                 makeVill(),
                 makeSold(),
                 saveGame(g),
@@ -174,12 +180,22 @@ public class GameController {
         return root;
     }
 
+    private Label popCount(Game g) {
+        Label population;
+        if (playerTurn) {
+            population = new Label("Population : " + g.getPlayerTown().getPopSize());
+        } else {
+            population = new Label("Population : " + g.getEnemyTown().getPopSize());
+        }
+        return population;
+    }
+
     private Label turnDisplay() {
         Label turnDisplay;
         if (playerTurn) {
-            turnDisplay = new Label("Blue" + "'s Turn ");
+            turnDisplay = new Label("Blue" + "'s Turn " + (turnLimit - turnPlayed) / 2 + " left ");
         } else {
-            turnDisplay = new Label("Red" + "'s Turn ");
+            turnDisplay = new Label("Red" + "'s Turn " + (turnLimit - turnPlayed) / 2 + " left ");
         }
         return turnDisplay;
     }
@@ -260,18 +276,24 @@ public class GameController {
     }
 
     private Label foodAmount(Game g) {
-        Label foodAmount = new Label("Food Amount: " + g.getPlayerTown().getAmountFood());
+        Label foodAmount;
+        if (playerTurn) {
+            foodAmount = new Label("Food Amount: " + g.getPlayerTown().getAmountFood() + " ");
+        } else {
+            foodAmount = new Label("Food Amount: " + g.getEnemyTown().getAmountFood() + " ");
+        }
         return foodAmount;
     }
 
     private Label goldAmount(Game g) {
-        Label goldAmount = new Label("Gold Amount: " + g.getPlayerTown().getAmountGold());
+        Label goldAmount;
+        if (playerTurn) {
+            goldAmount = new Label("Gold Amount: " + g.getPlayerTown().getAmountGold() + " ");
+        } else {
+            goldAmount = new Label("Gold Amount: " + g.getEnemyTown().getAmountGold() + " ");
+        }
         return goldAmount;
     }
 
-    private Label blankSpace() {
-        Label blankSpace = new Label("  ");
-        return blankSpace;
-    }
 
 }

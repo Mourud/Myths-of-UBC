@@ -15,6 +15,12 @@ public class TownCentre extends GameObject {
 
     // CONSTANTS
 
+    private static final int IS_IN_WAR = GameConstants.IS_IN_WAR_CODE;
+    private static final int IS_IN_TOWN = GameConstants.IS_IN_TOWN_CODE;
+    private static final int IS_OUT_OF_TOWN = GameConstants.IS_OUT_OF_TOWN_CODE;
+    private static final int IS_IN_FARM = GameConstants.IS_IN_FARM_CODE;
+    private static final int IS_IN_GOLD_MINE = GameConstants.IS_IN_GOLD_MINE_CODE;
+
     // TOWNCENTER
     private static final Position PLAYER_POS = GameConstants.PLAYER_TOWN_POS;
     private static final Position ENEMY_POS = GameConstants.ENEMY_TOWN_POS;
@@ -231,5 +237,25 @@ public class TownCentre extends GameObject {
 
     public int getPersonID() {
         return personID;
+    }
+
+    public void incrementResources() {
+
+        for (Person p : registry) {
+            int zone = p.getPersonGameZone();
+            switch (zone) {
+                case IS_IN_FARM:
+                    p.gatherResource("F");
+                    break;
+                case IS_IN_GOLD_MINE:
+                    p.gatherResource("G");
+                    break;
+                default: doNothing();
+
+            }
+        }
+    }
+
+    private void doNothing() {
     }
 }
