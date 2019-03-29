@@ -245,12 +245,12 @@ public abstract class Person extends GameObject {
     private boolean withinY(int mouseY, int size) {
         int upperY = pos.getPosY() + size;
         int lowerY = pos.getPosY();
-        System.out.println(size);
-        System.out.println("position Y: " + pos.getPosY()
-                + "\nposition mouseY: " + mouseY
-                + "\nupperY: " + upperY
-                + "\nlowerY: " + lowerY
-        );
+//        System.out.println(size);
+//        System.out.println("position Y: " + pos.getPosY()
+//                + "\nposition mouseY: " + mouseY
+//                + "\nupperY: " + upperY
+//                + "\nlowerY: " + lowerY
+//        );
         return mouseY <= upperY && mouseY >= lowerY;
 
     }
@@ -258,12 +258,12 @@ public abstract class Person extends GameObject {
     private boolean withinX(int mouseX, int size) {
         int upperX = pos.getPosX() + size;
         int lowerX = pos.getPosX() - size;
-        System.out.println(size);
-        System.out.println("position X: " + pos.getPosX()
-                + "\nposition mouseX: " + mouseX
-                + "\nupperX: " + upperX
-                + "\nlowerX: " + lowerX
-        );
+//        System.out.println(size);
+//        System.out.println("position X: " + pos.getPosX()
+//                + "\nposition mouseX: " + mouseX
+//                + "\nupperX: " + upperX
+//                + "\nlowerX: " + lowerX
+//        );
         return mouseX <= upperX && mouseX >= lowerX;
     }
 
