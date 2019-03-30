@@ -62,7 +62,7 @@ public class GameConstants {
             // LEVEL3 SETTINGS
     public static final String LEVEL3 = "Hard";
     public static final int HARD_START_POP = 1;
-    public static final int HARD_START_RESOURCES = 100000000;
+    public static final int HARD_START_RESOURCES = 0;
 
         // PERSON CONSTANTS
     public static final int BIRTH_RADIUS = TOWN_SIZE;

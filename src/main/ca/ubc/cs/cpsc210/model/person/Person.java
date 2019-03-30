@@ -184,20 +184,13 @@ public abstract class Person extends GameObject {
         return withinX(mouseX, size) && withinY(mouseY, size);
     }
 
+
     private boolean isWithinPos(int place) {
         switch (place) {
-            case IS_IN_TOWN:
-                return isInTown();
             case IS_IN_FARM:
                 return isInFarm();
             case IS_IN_GOLD_MINE:
                 return isInMine();
-            case IS_OUT_OF_TOWN:
-                if (myTown.getTranslateX() == GameConstants.PLAYER_TOWN_POS_X) {
-                    return isOutOfTownPlayer();
-                } else {
-                    return isOutOfTownEnemy();
-                }
             default:
                 return false;
         }
@@ -239,7 +232,7 @@ public abstract class Person extends GameObject {
     }
 
     private boolean isWithinX(double posX, int width, int height) {
-        return pos.getPosY() >= posX && pos.getPosY() <= posX + width;
+        return pos.getPosX() >= posX && pos.getPosX() <= posX + width;
     }
 
     private boolean withinY(int mouseY, int size) {
@@ -268,11 +261,8 @@ public abstract class Person extends GameObject {
     }
 
     public int getPersonGameZone() {
-        if (isWithinPos(IS_IN_TOWN)) {
-            return IS_IN_TOWN;
-        } else if (isWithinPos(IS_OUT_OF_TOWN)) {
-            return IS_OUT_OF_TOWN;
-        } else if (isWithinPos(IS_IN_FARM)) {
+
+        if (isWithinPos(IS_IN_FARM)) {
             return IS_IN_FARM;
         } else if (isWithinPos(IS_IN_GOLD_MINE)) {
             return IS_IN_GOLD_MINE;
