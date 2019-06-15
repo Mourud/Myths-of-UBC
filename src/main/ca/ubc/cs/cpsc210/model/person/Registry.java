@@ -46,4 +46,22 @@ public class Registry implements Iterable<Person> {
             p.updateLabel();
         }
     }
+
+    private class RegistryIterator implements Iterator<Person> {
+
+        public RegistryIterator(){
+
+        }
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Person next() {
+            return null;
+        }
+
+    }
 }

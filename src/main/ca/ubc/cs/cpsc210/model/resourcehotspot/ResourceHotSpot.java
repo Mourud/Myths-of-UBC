@@ -50,14 +50,23 @@ public abstract class ResourceHotSpot extends GameObject {
 //    public int hashCode() {
 //        return Objects.hash(resourceRemaining);
 //    }
+//    isDepleated()
 
     public boolean decrementResourceLeft(int gatherRate) {
         if (resourceRemaining > 0) {
             resourceRemaining -= gatherRate;
+            if (resourceRemaining <= 0) {
+                depleted();
+            }
             return true;
         } else {
+            depleted();
             System.out.println("Resource depleted");
             return false;
         }
+    }
+
+    public void depleted() {
+        setFill(Color.GRAY);
     }
 }

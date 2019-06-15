@@ -25,6 +25,10 @@ public class GoldMine extends ResourceHotSpot {
         setFill(GOLDMINE_COLOR);
     }
 
+//    public void depleted(){
+//        setFill(GOLDMINE_DEAD_COLOR);
+//    }
+
 
 //todo: add dying function
 

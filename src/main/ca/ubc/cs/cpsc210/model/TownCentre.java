@@ -198,11 +198,13 @@ public class TownCentre extends GameObject {
     public void gatherResource(String resourceName, int gatherRate) {
         if (gatherRate != 0) {
             if (resourceName.equals("G")) {
-                amountGold += gatherRate;
-                Game.goldMine.decrementResourceLeft(gatherRate);
+                if (Game.goldMine.decrementResourceLeft(gatherRate)) {
+                    amountGold += gatherRate;
+                }
             } else if (resourceName.equals("F")) {
-                amountFood += gatherRate;
-                Game.farm.decrementResourceLeft(gatherRate);
+                if (Game.farm.decrementResourceLeft(gatherRate)) {
+                    amountFood += gatherRate;
+                }
             } else {
                 System.out.println("INVALID");
             }
@@ -250,7 +252,8 @@ public class TownCentre extends GameObject {
                 case IS_IN_GOLD_MINE:
                     p.gatherResource("G");
                     break;
-                default: doNothing();
+                default:
+                    doNothing();
 
             }
         }

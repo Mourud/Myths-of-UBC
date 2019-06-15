@@ -29,7 +29,7 @@ public class GameConstants {
     public static final Position ENEMY_TOWN_POS = new Position(ENEMY_TOWN_POS_X, ENEMY_TOWN_POS_Y);
 
     // ResourceHotSpot
-    public static final int STARTING_RESOURCES = 500;
+    public static final int STARTING_RESOURCES = 100;
     public static final int RESOURCE_HOTSPOT_WIDTH = 150;
     public static final int RESOURCE_HOTSPOT_HEIGHT = 100;
 
@@ -61,7 +61,7 @@ public class GameConstants {
 
             // LEVEL3 SETTINGS
     public static final String LEVEL3 = "Hard";
-    public static final int HARD_START_POP = 1;
+    public static final int HARD_START_POP = 2;
     public static final int HARD_START_RESOURCES = 0;
 
         // PERSON CONSTANTS

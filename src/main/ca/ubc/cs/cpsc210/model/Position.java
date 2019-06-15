@@ -8,6 +8,7 @@ public class Position {
     private static final int BIRTH_RADIUS = GameConstants.BIRTH_RADIUS;
     private static final int GAME_HEIGHT = GameConstants.GAME_SCREEN_HEIGHT;
     private static final int GAME_WIDTH = GameConstants.GAME_SCREEN_WIDTH;
+    private static final int BUFFER = 2 * GameConstants.SOLDIER_SIZE;
 
     private int posX;
     private int posY;
@@ -33,10 +34,10 @@ public class Position {
     public void random(boolean isPlayer) {
         if (isPlayer) {
             posX = BIRTH_RADIUS + (int) (Math.random() * BIRTH_RADIUS + 1);
-            posY = GAME_HEIGHT - (int) (Math.random() * BIRTH_RADIUS - 1);
+            posY = GAME_HEIGHT - BUFFER - (int) (Math.random() * BIRTH_RADIUS - 1);
         } else {
             posX = GAME_WIDTH - BIRTH_RADIUS - (int) (Math.random() * BIRTH_RADIUS - 1);
-            posY = (int) (Math.random() * BIRTH_RADIUS + 1);
+            posY = BUFFER + (int) (Math.random() * BIRTH_RADIUS + 1);
         }
     }
 
