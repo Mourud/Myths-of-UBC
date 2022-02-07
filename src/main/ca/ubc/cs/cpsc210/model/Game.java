@@ -36,7 +36,7 @@ public class Game {
     private int playerTurnCount;
     private TownCentre enemyTown;
     private int enemyTurnCount;
-    private static boolean isPlayerTurn;
+    private boolean isPlayerTurn;
 
     public void setTurnsPlayed(int turnsPlayed) {
         this.turnsPlayed = turnsPlayed;
@@ -44,7 +44,7 @@ public class Game {
 
     private int turnsPlayed;
 
-    public static void setPlayerTurn(boolean bool) {
+    public void setPlayerTurn(boolean bool) {
         isPlayerTurn = bool;
     }
 
@@ -57,7 +57,7 @@ public class Game {
         return enemyTurnCount;
     }
 
-    public static boolean isPlayerTurn() {
+    public boolean isPlayerTurn() {
         return isPlayerTurn;
     }
 
@@ -65,14 +65,19 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: makes game depending on difficulty
     public Game(String difficulty) {
-        if (difficulty.equals(LEVEL1)) {
-            setupGame(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
-        } else if (difficulty.equals(LEVEL2)) {
-            setupGame(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
-        } else if (difficulty.equals(LEVEL3)) {
-            setupGame(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
-        } else {
-            System.out.println("Invalid");
+        switch (difficulty) {
+            case LEVEL1:
+                setupGame(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
+                break;
+            case LEVEL2:
+                setupGame(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
+                break;
+            case LEVEL3:
+                setupGame(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
+                break;
+            default:
+                System.out.println("Invalid");
+                break;
         }
     }
 
