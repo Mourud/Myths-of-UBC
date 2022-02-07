@@ -78,7 +78,7 @@ public class GameController {
         if ((selected == (null))) {
             if (player.findPerson(mousePos) != null) {
                 selected = player.findPerson(mousePos);
-
+                game.setTurnsPlayed(game.getTurnsPlayed() + 1);
             }
         } else {
             selected.walkTo(mousePos.getPosX(), mousePos.getPosY());
