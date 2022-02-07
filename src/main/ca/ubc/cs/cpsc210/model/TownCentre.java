@@ -5,9 +5,7 @@ import ca.ubc.cs.cpsc210.model.person.Person;
 import ca.ubc.cs.cpsc210.model.person.Registry;
 import ca.ubc.cs.cpsc210.model.person.Soldier;
 import ca.ubc.cs.cpsc210.model.person.Villager;
-import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,7 +19,7 @@ public class TownCentre extends GameObject {
     private static final int IS_IN_FARM = GameConstants.IS_IN_FARM_CODE;
     private static final int IS_IN_GOLD_MINE = GameConstants.IS_IN_GOLD_MINE_CODE;
 
-    // TOWNCENTER
+    // TOWN CENTER
     private static final Position PLAYER_POS = GameConstants.PLAYER_TOWN_POS;
     private static final Position ENEMY_POS = GameConstants.ENEMY_TOWN_POS;
     private static final int SIZE = GameConstants.TOWN_SIZE;

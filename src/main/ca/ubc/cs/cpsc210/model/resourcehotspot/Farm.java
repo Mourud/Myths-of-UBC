@@ -9,8 +9,9 @@ public class Farm extends ResourceHotSpot {
 
     private static final Position POSITION = GameConstants.FARM_POSITION;
 
-    private static Color FARM_COLOR = GameConstants.FARM_COLOR;
-    private static Color FARM_DEAD_COLOR = GameConstants.FARM_DEAD_COLOR;
+    private static final Color FARM_COLOR = GameConstants.FARM_COLOR;
+    // TODO: Add farm finishing
+    private static final Color FARM_DEAD_COLOR = GameConstants.FARM_DEAD_COLOR;
 
     public Farm() {
         super();

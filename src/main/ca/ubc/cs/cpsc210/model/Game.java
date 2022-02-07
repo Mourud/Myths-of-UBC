@@ -33,33 +33,10 @@ public class Game {
     public static ResourceHotSpot goldMine;
     public static ResourceHotSpot farm;
     private TownCentre playerTown;
-    private int playerTurnCount;
     private TownCentre enemyTown;
-    private int enemyTurnCount;
     private boolean isPlayerTurn;
 
-    public void setTurnsPlayed(int turnsPlayed) {
-        this.turnsPlayed = turnsPlayed;
-    }
 
-    private int turnsPlayed;
-
-    public void setPlayerTurn(boolean bool) {
-        isPlayerTurn = bool;
-    }
-
-
-    public int getPlayerTurnCount() {
-        return playerTurnCount;
-    }
-
-    public int getEnemyTurnCount() {
-        return enemyTurnCount;
-    }
-
-    public boolean isPlayerTurn() {
-        return isPlayerTurn;
-    }
 
     // REQUIRES: valid difficulty
     // MODIFIES: this
@@ -115,6 +92,20 @@ public class Game {
 
     }
 
+    public void setTurnsPlayed(int turnsPlayed) {
+        this.turnsPlayed = turnsPlayed;
+    }
+
+    private int turnsPlayed;
+
+    public void setPlayerTurn(boolean bool) {
+        isPlayerTurn = bool;
+    }
+
+
+    public boolean isPlayerTurn() {
+        return isPlayerTurn;
+    }
     public ResourceHotSpot getFarm() {
         return farm;
     }
@@ -150,16 +141,8 @@ public class Game {
         return Objects.hash(playerTown, enemyTown);
     }
 
-    public void initializeCounter() {
-        turnsPlayed = 0;
-    }
-
     public int getTurnsPlayed() {
         return turnsPlayed;
-    }
-
-    public void incrementCounter() {
-        turnsPlayed++;
     }
 
     public void updateTowns() {

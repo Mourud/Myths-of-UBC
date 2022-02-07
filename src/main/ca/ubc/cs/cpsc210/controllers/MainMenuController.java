@@ -4,11 +4,11 @@ import ca.ubc.cs.cpsc210.ui.TheMythsOfUbc;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainMenuController extends GameController {
 
@@ -24,7 +24,7 @@ public class MainMenuController extends GameController {
 
     @FXML
     public void startNewGame() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/ca/ubc/cs/cpsc210/ui/DifficultyMenu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ca/ubc/cs/cpsc210/ui/DifficultyMenu.fxml")));
         TheMythsOfUbc.setScene(root);
 
     }

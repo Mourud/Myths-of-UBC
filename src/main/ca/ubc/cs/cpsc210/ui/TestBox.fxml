@@ -41,15 +41,13 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-    <children>
-        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="10"/>
-        <Circle fill="#e9ff1f" radius="61.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="2"/>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="171.0" stroke="BLACK" strokeType="INSIDE"
-                   width="199.0" GridPane.rowIndex="13"/>
-        <Circle fill="#9d6e08" layoutX="71.0" layoutY="73.0" radius="61.0" stroke="BLACK" strokeType="INSIDE"
-                GridPane.columnIndex="7" GridPane.rowIndex="14"/>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff281f" height="160.0" layoutX="10.0" layoutY="278.0"
-                   stroke="BLACK" strokeType="INSIDE" width="203.0" GridPane.columnIndex="6" GridPane.rowIndex="3"/>
-        <Button mnemonicParsing="false" text="Button"/>
-    </children>
+    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="10"/>
+    <Circle fill="#e9ff1f" radius="61.0" stroke="BLACK" strokeType="INSIDE" GridPane.rowIndex="2"/>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="171.0" stroke="BLACK" strokeType="INSIDE"
+               width="199.0" GridPane.rowIndex="13"/>
+    <Circle fill="#9d6e08" layoutX="71.0" layoutY="73.0" radius="61.0" stroke="BLACK" strokeType="INSIDE"
+            GridPane.columnIndex="7" GridPane.rowIndex="14"/>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff281f" height="160.0" layoutX="10.0" layoutY="278.0"
+               stroke="BLACK" strokeType="INSIDE" width="203.0" GridPane.columnIndex="6" GridPane.rowIndex="3"/>
+    <Button mnemonicParsing="false" text="Button"/>
 </GridPane>

@@ -9,8 +9,9 @@ import ca.ubc.cs.cpsc210.model.person.Registry;
 import ca.ubc.cs.cpsc210.parsers.GameParser;
 import ca.ubc.cs.cpsc210.persistence.JSonifier;
 import ca.ubc.cs.cpsc210.ui.TheMythsOfUbc;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,8 +19,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -151,7 +150,7 @@ public class GameController {
     }
 
     private void prepareToUpdatePlayerPosition(Scene scene) {
-        Objects.requireNonNull(scene).setOnMouseClicked(e -> mouseHandle(e));
+        Objects.requireNonNull(scene).setOnMouseClicked(this::mouseHandle);
 
     }
 
@@ -203,6 +202,7 @@ public class GameController {
         }
     }
 
+    @FXML
     private Button makeVill() {
         Button makeVill = new Button("Villager");
 
@@ -222,6 +222,7 @@ public class GameController {
     }
 
 
+    @FXML
     private Button makeSold() {
         Button makeSold = new Button("Soldier");
         makeSold.setOnAction(e -> {
@@ -261,7 +262,7 @@ public class GameController {
     }
 
     public void setMainMenu() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/ca/ubc/cs/cpsc210/ui/MainMenu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ca/ubc/cs/cpsc210/ui/MainMenu.fxml")));
         TheMythsOfUbc.setScene(root);
     }
 
@@ -290,6 +291,5 @@ public class GameController {
         }
         return goldAmount;
     }
-
 
 }
