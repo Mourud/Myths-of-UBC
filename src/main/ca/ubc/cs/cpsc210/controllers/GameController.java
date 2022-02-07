@@ -34,8 +34,6 @@ public class GameController {
 
     private Person selected = null;
     public int turnLimit;
-    int turnPlayed = 0;
-    //boolean playerTurn = true;
     boolean gameStart = false;
 
     private static Game game;
@@ -81,12 +79,12 @@ public class GameController {
         if ((selected == (null))) {
             if (player.findPerson(mousePos) != null) {
                 selected = player.findPerson(mousePos);
-                turnPlayed++;
+
             }
         } else {
             selected.walkTo(mousePos.getPosX(), mousePos.getPosY());
             Person opponent = op.findPerson(mousePos);
-            turnPlayed += 1;
+            game.setTurnsPlayed(game.getTurnsPlayed() + 1);
             if (opponent != null) {
                 selected.attack(opponent);
             }
@@ -99,10 +97,10 @@ public class GameController {
             setTurnLimit();
             gameStart = !gameStart;
         }
-        if (turnPlayed >= turnLimit) {
+        if (game.getTurnsPlayed() >= turnLimit) {
             Game.setPlayerTurn(!Game.isPlayerTurn());
             incrementResources();
-            turnPlayed = 0;
+            game.setTurnsPlayed(0);
             setTurnLimit();
         }
         game.updateTowns();
@@ -191,9 +189,9 @@ public class GameController {
     private Label turnDisplay() {
         Label turnDisplay;
         if (Game.isPlayerTurn()) {
-            turnDisplay = new Label("Blue" + "'s Turn " + (turnLimit - turnPlayed) / 2 + " left ");
+            turnDisplay = new Label("Blue" + "'s Turn " + (turnLimit - game.getTurnsPlayed()) / 2 + " left ");
         } else {
-            turnDisplay = new Label("Red" + "'s Turn " + (turnLimit - turnPlayed) / 2 + " left ");
+            turnDisplay = new Label("Red" + "'s Turn " + (turnLimit - game.getTurnsPlayed()) / 2 + " left ");
         }
         return turnDisplay;
     }
@@ -216,7 +214,7 @@ public class GameController {
                 personMadeSuccessful = game.getEnemyTown().procreateVillager();
             }
             if (personMadeSuccessful) {
-                turnPlayed += 2;
+                game.setTurnsPlayed(game.getTurnsPlayed() + 2);
             }
             update();
         });
@@ -234,7 +232,7 @@ public class GameController {
                 personMadeSuccessful = game.getEnemyTown().procreateSoldier();
             }
             if (personMadeSuccessful) {
-                turnPlayed += 2;
+                game.setTurnsPlayed(game.getTurnsPlayed() + 2);
             }
             update();
         });

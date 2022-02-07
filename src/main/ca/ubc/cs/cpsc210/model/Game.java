@@ -37,6 +37,11 @@ public class Game {
     private TownCentre enemyTown;
     private int enemyTurnCount;
     private static boolean isPlayerTurn;
+
+    public void setTurnsPlayed(int turnsPlayed) {
+        this.turnsPlayed = turnsPlayed;
+    }
+
     private int turnsPlayed;
 
     public static void setPlayerTurn(boolean bool) {
@@ -60,7 +65,6 @@ public class Game {
     // MODIFIES: this
     // EFFECTS: makes game depending on difficulty
     public Game(String difficulty) {
-        isPlayerTurn = true;
         if (difficulty.equals(LEVEL1)) {
             setupGame(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
         } else if (difficulty.equals(LEVEL2)) {
@@ -79,6 +83,8 @@ public class Game {
     // REQUIRES: (pop, food, gold) >= 0
     // EFFECTS: sets game with give population, food
     private void setupGame(int pop, int food, int gold) {
+        isPlayerTurn = true;
+        turnsPlayed = 0;
         playerTown = new TownCentre(pop, food, gold, true);
         enemyTown = new TownCentre(pop, food, gold, false);
 
@@ -87,9 +93,10 @@ public class Game {
     }
 
     private void setupGame(JSONObject j) {
-        //TODO put into Game init func
 
         isPlayerTurn = j.getBoolean("isPlayerTurn");
+
+        turnsPlayed = j.getInt("turnsPlayed");
 
         JSONObject playerTownJson = j.getJSONObject("playerTown");
         playerTown = new TownCentre(playerTownJson);
