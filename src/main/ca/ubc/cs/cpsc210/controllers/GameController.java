@@ -35,7 +35,7 @@ public class GameController {
     private Person selected = null;
     public int turnLimit;
     int turnPlayed = 0;
-    boolean playerTurn = true;
+    //boolean playerTurn = true;
     boolean gameStart = false;
 
     private static Game game;
@@ -56,6 +56,7 @@ public class GameController {
                 + "\\saveFiles\\savedGame.json");
         try {
             String s = Files.lines(path).collect(Collectors.joining());
+            // TODO: Bring to game file
             game = GameParser.parse(s);
 
             update();
@@ -68,7 +69,7 @@ public class GameController {
         Position mousePos = new Position((int) e.getSceneX(), (int) e.getSceneY());
         TownCentre player = game.getPlayerTown();
         TownCentre op = game.getEnemyTown();
-        if (playerTurn) {
+        if (Game.isPlayerTurn()) {
             moveOrder(player, op, mousePos);
         } else {
             moveOrder(op, player, mousePos);
@@ -98,11 +99,8 @@ public class GameController {
             setTurnLimit();
             gameStart = !gameStart;
         }
-        System.out.println("TurnLimit : " + turnLimit);
-        System.out.println("Turn : " + playerTurn);
-        System.out.println("TurnPlaued : " + turnPlayed);
         if (turnPlayed >= turnLimit) {
-            playerTurn = !playerTurn;
+            Game.setPlayerTurn(!Game.isPlayerTurn());
             incrementResources();
             turnPlayed = 0;
             setTurnLimit();
@@ -113,7 +111,7 @@ public class GameController {
     }
 
     private void incrementResources() {
-        if (playerTurn) {
+        if (Game.isPlayerTurn()) {
             game.getPlayerTown().incrementResources();
         } else {
             game.getEnemyTown().incrementResources();
@@ -121,7 +119,7 @@ public class GameController {
     }
 
     private void setTurnLimit() {
-        if (playerTurn) {
+        if (Game.isPlayerTurn()) {
             turnLimit = 2 * game.getPlayerTown().getPopSize();
         } else {
             turnLimit = 2 * game.getEnemyTown().getPopSize();
@@ -182,7 +180,7 @@ public class GameController {
 
     private Label popCount(Game g) {
         Label population;
-        if (playerTurn) {
+        if (Game.isPlayerTurn()) {
             population = new Label("Population : " + g.getPlayerTown().getPopSize());
         } else {
             population = new Label("Population : " + g.getEnemyTown().getPopSize());
@@ -192,7 +190,7 @@ public class GameController {
 
     private Label turnDisplay() {
         Label turnDisplay;
-        if (playerTurn) {
+        if (Game.isPlayerTurn()) {
             turnDisplay = new Label("Blue" + "'s Turn " + (turnLimit - turnPlayed) / 2 + " left ");
         } else {
             turnDisplay = new Label("Red" + "'s Turn " + (turnLimit - turnPlayed) / 2 + " left ");
@@ -212,7 +210,7 @@ public class GameController {
 
         makeVill.setOnAction(e -> {
             boolean personMadeSuccessful;
-            if (playerTurn) {
+            if (Game.isPlayerTurn()) {
                 personMadeSuccessful = game.getPlayerTown().procreateVillager();
             } else {
                 personMadeSuccessful = game.getEnemyTown().procreateVillager();
@@ -230,7 +228,7 @@ public class GameController {
         Button makeSold = new Button("Soldier");
         makeSold.setOnAction(e -> {
             boolean personMadeSuccessful;
-            if (playerTurn) {
+            if (Game.isPlayerTurn()) {
                 personMadeSuccessful = game.getPlayerTown().procreateSoldier();
             } else {
                 personMadeSuccessful = game.getEnemyTown().procreateSoldier();
@@ -277,7 +275,7 @@ public class GameController {
 
     private Label foodAmount(Game g) {
         Label foodAmount;
-        if (playerTurn) {
+        if (Game.isPlayerTurn()) {
             foodAmount = new Label("Food Amount: " + g.getPlayerTown().getAmountFood() + " ");
         } else {
             foodAmount = new Label("Food Amount: " + g.getEnemyTown().getAmountFood() + " ");
@@ -287,7 +285,7 @@ public class GameController {
 
     private Label goldAmount(Game g) {
         Label goldAmount;
-        if (playerTurn) {
+        if (Game.isPlayerTurn()) {
             goldAmount = new Label("Gold Amount: " + g.getPlayerTown().getAmountGold() + " ");
         } else {
             goldAmount = new Label("Gold Amount: " + g.getEnemyTown().getAmountGold() + " ");

@@ -62,12 +62,12 @@ public class JSonifier {
 
     public static JSONObject gameToJson(Game g) {
         JSONObject saveGame = new JSONObject();
-
+        //TODO: Make Game static? Fix Access
+        saveGame.put("isPlayerTurn",g.isPlayerTurn());
         saveGame.put("playerTown", townToJson(g.getPlayerTown()));
         saveGame.put("enemyTown", townToJson(g.getEnemyTown()));
         saveGame.put("goldMine", resourceHotSpotToJson(g.goldMine));
         saveGame.put("farm", resourceHotSpotToJson(g.farm));
-
         return saveGame;
     }
 }

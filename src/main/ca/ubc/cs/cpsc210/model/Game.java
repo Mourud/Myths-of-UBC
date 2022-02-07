@@ -36,9 +36,12 @@ public class Game {
     private int playerTurnCount;
     private TownCentre enemyTown;
     private int enemyTurnCount;
-    private boolean isPlayerTurn;
+    private static boolean isPlayerTurn;
     private int turnsPlayed;
 
+    public static void setPlayerTurn(boolean bool) {
+        isPlayerTurn = bool;
+    }
 
 
     public int getPlayerTurnCount() {
@@ -49,7 +52,7 @@ public class Game {
         return enemyTurnCount;
     }
 
-    public boolean isPlayerTurn() {
+    public static boolean isPlayerTurn() {
         return isPlayerTurn;
     }
 
@@ -84,7 +87,9 @@ public class Game {
     }
 
     private void setupGame(JSONObject j) {
-        //isPlayerTurn = j.getBoolean("isPlayerTurn");
+        //TODO put into Game init func
+
+        isPlayerTurn = j.getBoolean("isPlayerTurn");
 
         JSONObject playerTownJson = j.getJSONObject("playerTown");
         playerTown = new TownCentre(playerTownJson);
