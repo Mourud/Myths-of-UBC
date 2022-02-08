@@ -1,7 +1,7 @@
 # Strategy Game
 
 ---
-How to run game:
+## How to run game:
 
 You must use IntelliJ to run the game.
 1. Download code
@@ -11,5 +11,7 @@ You must use IntelliJ to run the game.
 ---
 
 
-Rules of the Game:
+## Rules of the Game:
 1. Deafeating all enemy villagers and soilders makes you win
+
+---
