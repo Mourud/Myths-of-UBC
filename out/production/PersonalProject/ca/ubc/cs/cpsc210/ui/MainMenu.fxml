@@ -7,27 +7,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="ca.ubc.cs.cpsc210.controllers.MainMenuController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ubc.cs.cpsc210.controllers.MainMenuController">
     <children>
         <VBox prefHeight="400.0" prefWidth="279.0">
             <children>
-                <Button fx:id="buttonStart" mnemonicParsing="false" onAction="#startNewGame" prefHeight="127.0"
-                        prefWidth="266.0" text="Start New Game"/>
-                <Button fx:id="buttonLoad" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadGame"
-                        prefHeight="133.0" prefWidth="266.0" text="Load Game"/>
-                <Button fx:id="buttonExit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeGame"
-                        prefHeight="143.0" prefWidth="266.0" text="Exit"/>
+                <Button fx:id="buttonStart" mnemonicParsing="false" onAction="#startNewGame" prefHeight="127.0" prefWidth="266.0" text="Start New Game" />
+                <Button fx:id="buttonLoad" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="133.0" prefWidth="266.0" text="Load Game" />
+                <Button fx:id="buttonExit" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeGame" prefHeight="143.0" prefWidth="266.0" text="Exit" />
             </children>
         </VBox>
-        <VBox prefHeight="400.0" prefWidth="345.0">
+        <VBox alignment="TOP_CENTER" prefHeight="491.0" prefWidth="421.0">
             <children>
                 <StackPane prefHeight="150.0" prefWidth="200.0">
                     <children>
-                        <Label fx:id="TITLE" prefHeight="497.0" prefWidth="347.0" text="The Myths of UBC">
+                        <Label fx:id="TITLE" prefHeight="186.0" prefWidth="333.0" text="The Myths of UBC">
                             <font>
-                                <Font name="Agency FB" size="61.0"/>
+                                <Font size="40.0" />
                             </font>
                         </Label>
                     </children>
