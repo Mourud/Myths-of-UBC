@@ -1,6 +1,23 @@
+# Java / IntelliJ IDEA specific files
+*.iml
+.idea/
+out/
+*.wav*.class
+
+# JavaFx
+*.jar
+
+# Other Java-related files
 *.class
+*.log
+*.swp
+*.hprof
+
+
 
 savedGame.json
 
 workspace.xml
+
+checkstyle.xml
 
