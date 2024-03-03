@@ -11,31 +11,14 @@ import java.util.Objects;
 //TODO: Complete testing and documenting
 public class Game {
 
-    // CONSTANTS
-
-    // LEVEL1 GAME SETTINGS
-    private static final String LEVEL1 = GameConstants.LEVEL1;
-    private static final int EASY_START_POP = GameConstants.EASY_START_POP;
-    private static final int EASY_START_RESOURCES = GameConstants.EASY_START_RESOURCES;
-
-    // LEVEL2 GAME SETTINGS
-    private static final String LEVEL2 = GameConstants.LEVEL2;
-    private static final int MEDIUM_START_POP = GameConstants.MEDIUM_START_POP;
-    private static final int MEDIUM_START_RESOURCES = GameConstants.MEDIUM_START_RESOURCES;
-
-    // LEVEL3 GAME SETTINGS
-    public static final String LEVEL3 = GameConstants.LEVEL3;
-    private static final int HARD_START_POP = GameConstants.HARD_START_POP;
-    private static final int HARD_START_RESOURCES = GameConstants.HARD_START_RESOURCES;
-
-
     //fields
     public static ResourceHotSpot goldMine;
     public static ResourceHotSpot farm;
     private TownCentre playerTown;
     private TownCentre enemyTown;
     private boolean isPlayerTurn;
-
+//    private TownCentre turnTown;
+    private int turnsPlayed;
 
 
     // REQUIRES: valid difficulty
@@ -43,14 +26,14 @@ public class Game {
     // EFFECTS: makes game depending on difficulty
     public Game(String difficulty) {
         switch (difficulty) {
-            case LEVEL1:
-                setupGame(EASY_START_POP, EASY_START_RESOURCES, EASY_START_RESOURCES);
+            case GameConstants.LEVEL1:
+                setupGame(GameConstants.EASY_START_POP, GameConstants.EASY_START_RESOURCES, GameConstants.EASY_START_RESOURCES);
                 break;
-            case LEVEL2:
-                setupGame(MEDIUM_START_POP, MEDIUM_START_RESOURCES, MEDIUM_START_RESOURCES);
+            case GameConstants.LEVEL2:
+                setupGame(GameConstants.MEDIUM_START_POP, GameConstants.MEDIUM_START_RESOURCES, GameConstants.MEDIUM_START_RESOURCES);
                 break;
-            case LEVEL3:
-                setupGame(HARD_START_POP, HARD_START_RESOURCES, HARD_START_RESOURCES);
+            case GameConstants.LEVEL3:
+                setupGame(GameConstants.HARD_START_POP, GameConstants.HARD_START_RESOURCES, GameConstants.HARD_START_RESOURCES);
                 break;
             default:
                 System.out.println("Invalid");
@@ -59,25 +42,8 @@ public class Game {
     }
 
     public Game(JSONObject j) {
-        setupGame(j);
-    }
-
-    // REQUIRES: (pop, food, gold) >= 0
-    // EFFECTS: sets game with give population, food
-    private void setupGame(int pop, int food, int gold) {
-        isPlayerTurn = true;
-        turnsPlayed = 0;
-        playerTown = new TownCentre(pop, food, gold, true);
-        enemyTown = new TownCentre(pop, food, gold, false);
-
-        goldMine = new GoldMine();
-        farm = new Farm();
-    }
-
-    private void setupGame(JSONObject j) {
 
         isPlayerTurn = j.getBoolean("isPlayerTurn");
-
         turnsPlayed = j.getInt("turnsPlayed");
 
         JSONObject playerTownJson = j.getJSONObject("playerTown");
@@ -89,14 +55,24 @@ public class Game {
         goldMine = new GoldMine(goldMineJson);
         JSONObject farmJson = j.getJSONObject("farm");
         farm = new Farm(farmJson);
-
     }
+
+    // REQUIRES: (pop, food, gold) >= 0
+    // EFFECTS: sets game with give population, food
+    private void setupGame(int pop, int food, int gold) {
+        isPlayerTurn = true;
+        turnsPlayed = 0;
+        playerTown = new TownCentre(pop, food, gold, true);
+        enemyTown = new TownCentre(pop, food, gold, false);
+        goldMine = new GoldMine();
+        farm = new Farm();
+    }
+
 
     public void setTurnsPlayed(int turnsPlayed) {
         this.turnsPlayed = turnsPlayed;
     }
 
-    private int turnsPlayed;
 
     public void setPlayerTurn(boolean bool) {
         isPlayerTurn = bool;
@@ -114,7 +90,6 @@ public class Game {
         return goldMine;
     }
 
-
     public TownCentre getEnemyTown() {
         return enemyTown;
     }
@@ -123,6 +98,16 @@ public class Game {
         return playerTown;
     }
 
+
+
+    public int getTurnsPlayed() {
+        return turnsPlayed;
+    }
+
+    public void updateTowns() {
+        getPlayerTown().getRegistry().update();
+        getEnemyTown().getRegistry().update();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -135,18 +120,8 @@ public class Game {
         return Objects.equals(playerTown, game.playerTown)
                 && Objects.equals(enemyTown, game.enemyTown);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(playerTown, enemyTown);
-    }
-
-    public int getTurnsPlayed() {
-        return turnsPlayed;
-    }
-
-    public void updateTowns() {
-        getPlayerTown().getRegistry().update();
-        getEnemyTown().getRegistry().update();
     }
 }
