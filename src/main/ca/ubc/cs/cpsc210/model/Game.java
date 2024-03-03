@@ -17,7 +17,7 @@ public class Game {
     private TownCentre playerTown;
     private TownCentre enemyTown;
     private boolean isPlayerTurn;
-//    private TownCentre turnTown;
+    //    private TownCentre turnTown;
     private int turnsPlayed;
 
 
@@ -73,15 +73,14 @@ public class Game {
         this.turnsPlayed = turnsPlayed;
     }
 
-
     public void setPlayerTurn(boolean bool) {
         isPlayerTurn = bool;
     }
 
-
     public boolean isPlayerTurn() {
         return isPlayerTurn;
     }
+
     public ResourceHotSpot getFarm() {
         return farm;
     }
@@ -98,16 +97,13 @@ public class Game {
         return playerTown;
     }
 
-
-
-    public int getTurnsPlayed() {
-        return turnsPlayed;
-    }
+    public int getTurnsPlayed() { return turnsPlayed; }
 
     public void updateTowns() {
         getPlayerTown().getRegistry().update();
         getEnemyTown().getRegistry().update();
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -120,6 +116,7 @@ public class Game {
         return Objects.equals(playerTown, game.playerTown)
                 && Objects.equals(enemyTown, game.enemyTown);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(playerTown, enemyTown);
