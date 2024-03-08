@@ -1,5 +1,5 @@
 # Web port is actively being developed: 
-https://mourud.github.io/village-insurgency/
+~~https://mourud.github.io/village-insurgency/~~
 # Strategy Game
 
 This is a 2 player turn based strategy game. Gather gold and food and create an army to defeat your oponent. Kill all your opponent's villagers and soldiers to win. REMEMBER resources are limited.
