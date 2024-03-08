@@ -2,15 +2,11 @@ package ca.ubc.cs.cpsc210.ui;
 
 import ca.ubc.cs.cpsc210.model.constants.GameConstants;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import java.util.Objects;
 
 // Starts Game Application, also works as controller for MainMenu
 public class TheMythsOfUbc extends Application {
@@ -31,7 +27,7 @@ public class TheMythsOfUbc extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/ca/ubc/cs/cpsc210/ui/MainMenu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ca/ubc/cs/cpsc210/ui/MainMenu.fxml")));
         window = primaryStage;
         window.setTitle(TITLE);
         window.setScene(new Scene(root, WIDTH, HEIGHT));
@@ -44,7 +40,7 @@ public class TheMythsOfUbc extends Application {
 
 
     public static void closeProgram() {
-        Boolean closeNow = ConfirmBox.display(TITLE, "Are you sure you want to exit?");
+        boolean closeNow = ConfirmBox.display(TITLE, "Are you sure you want to exit?");
         if (closeNow) {
             window.close();
         }
