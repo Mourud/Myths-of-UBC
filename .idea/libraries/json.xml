@@ -5,5 +5,8 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <excluded>
+      <root url="jar://$PROJECT_DIR$/lib/javafx-basic-archetype-1.1.jar!/" />
+    </excluded>
   </library>
 </component>
