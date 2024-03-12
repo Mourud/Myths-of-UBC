@@ -14,7 +14,7 @@ out/
 *.hprof
 
 
-
+*.DS_Store
 savedGame.json
 
 workspace.xml
